@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ByteListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     struct ByteItem {
         let title : String
@@ -29,9 +29,6 @@ class NewViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 600
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,7 +46,7 @@ class NewViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showItem") {
-            let upcoming: ItemViewController = segue.destination as! ItemViewController
+            let upcoming: ByteItemViewController = segue.destination as! ByteItemViewController
             
             let indexPath = self.tableView.indexPathForSelectedRow!
             
@@ -64,6 +61,5 @@ class NewViewController: UIViewController, UITableViewDataSource, UITableViewDel
         self.performSegue(withIdentifier: "showItem", sender: self)
     }
     
-    
-    
+
 }

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ItemViewController: UIViewController {
+class ByteItemViewController: UIViewController {
     @IBOutlet weak var text : UILabel!
-    var item : NewViewController.ByteItem? = nil
+    var item : ByteListViewController.ByteItem? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()

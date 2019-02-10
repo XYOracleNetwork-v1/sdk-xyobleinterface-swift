@@ -13,8 +13,8 @@
 		8C924DE22210CCA8007FF765 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C924DE02210CCA8007FF765 /* Main.storyboard */; };
 		8C924DE42210CCA9007FF765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C924DE32210CCA9007FF765 /* Assets.xcassets */; };
 		8C924DE72210CCA9007FF765 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C924DE52210CCA9007FF765 /* LaunchScreen.storyboard */; };
-		8C924DEF2210CE33007FF765 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DEE2210CE33007FF765 /* ItemViewController.swift */; };
-		8C924DF12210CE4A007FF765 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DF02210CE4A007FF765 /* NewViewController.swift */; };
+		8C924DEF2210CE33007FF765 /* ByteItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DEE2210CE33007FF765 /* ByteItemViewController.swift */; };
+		8C924DF12210CE4A007FF765 /* ByteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DF02210CE4A007FF765 /* ByteListViewController.swift */; };
 		8C924DF32210CE5C007FF765 /* TableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DF22210CE5C007FF765 /* TableViewCellController.swift */; };
 		8C924DF72210D25F007FF765 /* BytesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DF62210D25F007FF765 /* BytesTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -29,8 +29,8 @@
 		8C924DE32210CCA9007FF765 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C924DE62210CCA9007FF765 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C924DE82210CCA9007FF765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C924DEE2210CE33007FF765 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
-		8C924DF02210CE4A007FF765 /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		8C924DEE2210CE33007FF765 /* ByteItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteItemViewController.swift; sourceTree = "<group>"; };
+		8C924DF02210CE4A007FF765 /* ByteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteListViewController.swift; sourceTree = "<group>"; };
 		8C924DF22210CE5C007FF765 /* TableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellController.swift; sourceTree = "<group>"; };
 		8C924DF62210D25F007FF765 /* BytesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytesTableViewCell.swift; sourceTree = "<group>"; };
 		98E63E2895E08B353E8B5A2A /* Pods-mod-ble-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mod-ble-sample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mod-ble-sample/Pods-mod-ble-sample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -77,14 +77,14 @@
 		8C924DDB2210CCA8007FF765 /* mod-ble-sample */ = {
 			isa = PBXGroup;
 			children = (
-				8C924DDC2210CCA8007FF765 /* AppDelegate.swift */,
-				8C924DDE2210CCA8007FF765 /* ViewController.swift */,
 				8C924DE02210CCA8007FF765 /* Main.storyboard */,
 				8C924DE32210CCA9007FF765 /* Assets.xcassets */,
 				8C924DE52210CCA9007FF765 /* LaunchScreen.storyboard */,
 				8C924DE82210CCA9007FF765 /* Info.plist */,
-				8C924DEE2210CE33007FF765 /* ItemViewController.swift */,
-				8C924DF02210CE4A007FF765 /* NewViewController.swift */,
+				8C924DDC2210CCA8007FF765 /* AppDelegate.swift */,
+				8C924DDE2210CCA8007FF765 /* ViewController.swift */,
+				8C924DEE2210CE33007FF765 /* ByteItemViewController.swift */,
+				8C924DF02210CE4A007FF765 /* ByteListViewController.swift */,
 				8C924DF22210CE5C007FF765 /* TableViewCellController.swift */,
 				8C924DF62210D25F007FF765 /* BytesTableViewCell.swift */,
 			);
@@ -232,8 +232,8 @@
 			files = (
 				8C924DDF2210CCA8007FF765 /* ViewController.swift in Sources */,
 				8C924DDD2210CCA8007FF765 /* AppDelegate.swift in Sources */,
-				8C924DEF2210CE33007FF765 /* ItemViewController.swift in Sources */,
-				8C924DF12210CE4A007FF765 /* NewViewController.swift in Sources */,
+				8C924DEF2210CE33007FF765 /* ByteItemViewController.swift in Sources */,
+				8C924DF12210CE4A007FF765 /* ByteListViewController.swift in Sources */,
 				8C924DF32210CE5C007FF765 /* TableViewCellController.swift in Sources */,
 				8C924DF72210D25F007FF765 /* BytesTableViewCell.swift in Sources */,
 			);

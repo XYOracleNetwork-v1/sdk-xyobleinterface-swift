@@ -74,10 +74,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath as IndexPath) as! TableViewCellController
-        
-        
         cell.title.text = "XYO"
-        
         return cell
     }
     
@@ -88,12 +85,12 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         do {
             if (segue.identifier == "showView") {
-                let upcoming: NewViewController = segue.destination as! NewViewController
+                let upcoming: ByteListViewController = segue.destination as! ByteListViewController
                 
                 let indexPath = self.tableView.indexPathForSelectedRow!
                 
-                upcoming.items.append(NewViewController.ByteItem(title: "Bytes", desc: boundWitness?.getBuffer().toByteArray().toHexString() ?? "Error"))
-                upcoming.items.append(NewViewController.ByteItem(title: "Hash", desc: try boundWitness?.getHash(hasher: XyoSha256()).getBuffer().toByteArray().toHexString() ?? "Error"))
+                upcoming.items.append(ByteListViewController.ByteItem(title: "Bytes", desc: boundWitness?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                upcoming.items.append(ByteListViewController.ByteItem(title: "Hash", desc: try boundWitness?.getHash(hasher: XyoSha256()).getBuffer().toByteArray().toHexString() ?? "Error"))
                 
                 
                 
@@ -103,8 +100,8 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
                     let fetter = try boundWitness?.getFetterOfParty(partyIndex: i)
                     let witness = try boundWitness?.getWitnessOfParty(partyIndex: i)
                     
-                    upcoming.items.append(NewViewController.ByteItem(title: "Fetter " + String(i), desc: fetter?.getBuffer().toByteArray().toHexString() ?? "Error"))
-                    upcoming.items.append(NewViewController.ByteItem(title: "Witness " + String(i), desc: witness?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                    upcoming.items.append(ByteListViewController.ByteItem(title: "Fetter " + String(i), desc: fetter?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                    upcoming.items.append(ByteListViewController.ByteItem(title: "Witness " + String(i), desc: witness?.getBuffer().toByteArray().toHexString() ?? "Error"))
                 }
                 
                 
@@ -115,16 +112,15 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = self.tableView.cellForRow(at: indexPath) as!TableViewCellController
-        guard let device = self.objects[indexPath.row] as? XYOBluetoothDevice else {
-            return
-        }
         self.canUpdate = false
         
         //        cell.indicator.startAnimating()
         DispatchQueue.main.async {
+            guard let device = self.objects[indexPath.row] as? XYOBluetoothDevice else {
+                return
+            }
+            
             device.connection {
-                
                 do {
                     guard let pipe = device.tryCreatePipe() else {
                         return
@@ -134,7 +130,6 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
                     
                     self.boundWitness = try self.originChainCreator.doNeogeoationThenBoundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff))
                     
-                    
                 } catch {
                     self.canUpdate = true
                     XYCentral.instance.disconnect(from: device)
@@ -142,24 +137,15 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
                     // cell.indicator.stopAnimating()
                 }
                 
-                
-                
-                
                 DispatchQueue.main.async {
                     // cell.indicator.stopAnimating()
                 }
                 
-                
-                
-                }.always {
-                    self.canUpdate = true
-                    XYCentral.instance.disconnect(from: device)
-                    self.performSegue(withIdentifier: "showView", sender: self)
-                    
-                    
+            }.always {
+                self.canUpdate = true
+                XYCentral.instance.disconnect(from: device)
+                self.performSegue(withIdentifier: "showView", sender: self)
             }
-            
-            
         }
         
     }
