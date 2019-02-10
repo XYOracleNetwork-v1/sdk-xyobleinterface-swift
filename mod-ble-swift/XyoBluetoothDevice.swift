@@ -1,15 +1,15 @@
 //
-//  XYOBluetoothDevice.swift
+//  XyoBluetoothDevice.swift
 //  mod-ble-swift
 //
-//  Created by Carter Harrison on 2/8/19.
+//  Created by Carter Harrison on 2/10/19.
 //  Copyright © 2019 XYO Network. All rights reserved.
 //
 
 import Foundation
 import Promises
-import XyBleSdk
 import CoreBluetooth
+import XyBleSdk
 import sdk_core_swift
 import sdk_objectmodel_swift
 
@@ -73,8 +73,6 @@ public class XYOBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     }
     
     public func send(data: [UInt8], waitForResponse: Bool) -> [UInt8]? {
-        print("SENDING: " + data.toHexString())
-        
         let sizeEncodedBytes = XyoBuffer()
             .put(bits: UInt32(data.count + 4))
             .put(bytes: data)
@@ -86,8 +84,6 @@ public class XYOBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
             let status = self.set(XYOSerive.read, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
             
             if (status.error != nil) {
-                
-                print(status.error)
                 return nil
             }
         }
@@ -103,7 +99,6 @@ public class XYOBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
                 }
             }
             
-            print("RECIVED: " + ((latestPacket?.toHexString()) ?? "none"))
             return latestPacket
         }
         

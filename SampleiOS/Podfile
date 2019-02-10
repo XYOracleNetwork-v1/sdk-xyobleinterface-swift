@@ -1,0 +1,14 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '11.0'
+use_frameworks!
+
+target 'mod-ble-sample' do
+ 	pod 'sdk-core-swift', :path => '/Users/carterharrison/Documents/github/xyo/sdk-core-swift/'
+    pod 'sdk-objectmodel-swift', :path => '/Users/carterharrison/Documents/github/xyo/sdk-objectmodel-swift'
+    pod 'XyBleSdk', :path => '/Users/carterharrison/Documents/github/xyo/sdk-ble-swift/'
+    pod 'mod-ble-swift', :path => '../'
+    
+end
+
+   
+

@@ -7,27 +7,50 @@
 //
 
 import XCTest
+@testable import mod_ble_swift
 
 class XyoInputStreamTest: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    
+    func testInputStreamOne() {
+        let stream = XyoInputStream()
+        stream.addPacket(packet: [0x00,0x00,0x00,0x06,0x01])
+        XCTAssertEqual(nil, stream.getOldestPacket())
+        stream.addPacket(packet: [0x02])
+        XCTAssertEqual([0x01,0x02], stream.getOldestPacket())
+        
+        stream.addPacket(packet: [0x00,0x00,0x00,0x06,0x03])
+        XCTAssertEqual(nil, stream.getOldestPacket())
+        stream.addPacket(packet: [0x04])
+        XCTAssertEqual([0x03,0x04], stream.getOldestPacket())
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testInputStreamTwo() {
+        let stream = XyoInputStream()
+        stream.addPacket(packet: [0x00,0x00,0x00,0x05,0x01])
+        XCTAssertEqual([0x01], stream.getOldestPacket())
+        
+        stream.addPacket(packet: [0x00,0x00,0x00,0x06,0x03])
+        XCTAssertEqual(nil, stream.getOldestPacket())
+        stream.addPacket(packet: [0x04])
+        XCTAssertEqual([0x03,0x04], stream.getOldestPacket())
+        
+        stream.addPacket(packet: [0x00,0x00,0x00,0x05,0x01])
+        XCTAssertEqual([0x01], stream.getOldestPacket())
+        
+        stream.addPacket(packet: [0x00,0x00,0x00,0x05,0x01])
+        XCTAssertEqual([0x01], stream.getOldestPacket())
+        
+        stream.addPacket(packet: [0x00,0x00,0x00,0x06,0x03])
+        XCTAssertEqual(nil, stream.getOldestPacket())
+        stream.addPacket(packet: [0x04])
+        XCTAssertEqual([0x03,0x04], stream.getOldestPacket())
+        
+        stream.addPacket(packet: [0x00,0x00,0x00,0x05,0x01])
+        XCTAssertEqual([0x01], stream.getOldestPacket())
+        
+        stream.addPacket(packet: [0x00,0x00,0x00,0x05,0x01])
+        XCTAssertEqual([0x01], stream.getOldestPacket())
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+    
 }

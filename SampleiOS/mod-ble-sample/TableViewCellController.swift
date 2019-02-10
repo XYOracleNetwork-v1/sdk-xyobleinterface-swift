@@ -1,20 +1,20 @@
 //
-//  BytesTableViewCell.swift
-//  mod-ble-sample
+//  TableViewCellController.swift
+//  mod-ble-swift
 //
-//  Created by Carter Harrison on 2/10/19.
+//  Created by Carter Harrison on 2/8/19.
 //  Copyright © 2019 XYO Network. All rights reserved.
 //
 
 import UIKit
 
-class BytesTableViewCell: UITableViewCell {
+class TableViewCellController: UITableViewCell {
     @IBOutlet weak var title : UILabel!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,3 +24,4 @@ class BytesTableViewCell: UITableViewCell {
     }
     
 }
+
