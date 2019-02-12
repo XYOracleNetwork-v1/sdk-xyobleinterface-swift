@@ -40,22 +40,13 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'PromisesSwift', '~> 1.2.4'
 
-  s.dependency 'sdk-objectmodel-swift'
-  s.dependency 'sdk-core-swift'
+  s.dependency 'sdk-objectmodel-swift',  '~> 0.1.0-beta.0'
+  s.dependency 'sdk-core-swift', '~> 0.1.0-beta.1'
   s.dependency 'XyBleSdk'
 
   s.subspec 'XyBleSdk' do |ss|
       ss.source_files         = '../../sdk-ble-swift/Source/**/*.{swift}'
   end
-
-  s.subspec 'sdk-objectmodel-swift' do |ss|
-      ss.source_files         = '../../sdk-objectmodel-swift/sdk-objectmodel-swift/**/*.{swift}'
-  end
-
-  s.subspec 'sdk-core-swift' do |ss|
-      ss.source_files         = '../../sdk-core-swift/sdk-core-swift/**/*.{swift}'
-  end
-
 
 
 end
