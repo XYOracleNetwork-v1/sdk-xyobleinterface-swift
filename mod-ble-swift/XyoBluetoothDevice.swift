@@ -13,12 +13,12 @@ import XyBleSdk
 import sdk_core_swift
 import sdk_objectmodel_swift
 
-public class XYOBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
+public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
     
-    public static let family = XYDeviceFamily.init(uuid: UUID(uuidString: XYOBluetoothDevice.uuid)!,
-                                                   prefix: XYOBluetoothDevice.prefix,
-                                                   familyName: XYOBluetoothDevice.familyName,
-                                                   id: XYOBluetoothDevice.id)
+    public static let family = XYDeviceFamily.init(uuid: UUID(uuidString: XyoBluetoothDevice.uuid)!,
+                                                   prefix: XyoBluetoothDevice.prefix,
+                                                   familyName: XyoBluetoothDevice.familyName,
+                                                   id: XyoBluetoothDevice.id)
     
     public static let id = "XYO"
     public static let uuid : String = "dddddddd-df36-484e-bc98-2d5398c5593e"
@@ -29,11 +29,11 @@ public class XYOBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     private var recivePromise : Promise<[UInt8]?>? = nil
     
     public init(_ id: String, iBeacon: XYIBeaconDefinition? = nil, rssi: Int = XYDeviceProximity.none.rawValue) {
-        super.init(id, rssi: rssi, family: XYOBluetoothDevice.family, iBeacon: iBeacon)
+        super.init(id, rssi: rssi, family: XyoBluetoothDevice.family, iBeacon: iBeacon)
     }
     
     public convenience init(iBeacon: XYIBeaconDefinition, rssi: Int = XYDeviceProximity.none.rawValue) {
-        self.init(iBeacon.xyId(from: XYOBluetoothDevice.family), iBeacon: iBeacon, rssi: rssi)
+        self.init(iBeacon.xyId(from: XyoBluetoothDevice.family), iBeacon: iBeacon, rssi: rssi)
     }
     
     public func tryCreatePipe () -> XyoNetworkPipe? {
@@ -53,7 +53,7 @@ public class XYOBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
             else { return false }
         
         guard
-            services.contains(CBUUID(string: XYOBluetoothDevice.uuid))
+            services.contains(CBUUID(string: XyoBluetoothDevice.uuid))
             else { return false }
         
         // Set the peripheral and delegate to self

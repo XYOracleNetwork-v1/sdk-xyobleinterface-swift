@@ -8,26 +8,26 @@
 import Foundation
 import XyBleSdk
 
-public struct XYOBluetoothDeviceCreator : XYDeviceCreator {
+public struct XyoBluetoothDeviceCreator : XYDeviceCreator {
     private init () {}
     
-    public static let uuid : String = XYOBluetoothDevice.uuid
-    public var family: XYDeviceFamily = XYOBluetoothDevice.family
+    public static let uuid : String = XyoBluetoothDevice.uuid
+    public var family: XYDeviceFamily = XyoBluetoothDevice.family
     
     
     public func createFromIBeacon (iBeacon: XYIBeaconDefinition, rssi: Int) -> XYBluetoothDevice? {
-        return XYOBluetoothDevice(iBeacon: iBeacon, rssi: rssi)
+        return XyoBluetoothDevice(iBeacon: iBeacon, rssi: rssi)
     }
     
     public func createFromId(id: String) -> XYBluetoothDevice {
-        return XYOBluetoothDevice(id)
+        return XyoBluetoothDevice(id)
     }
     
     public static func enable (enable : Bool) {
         if (enable) {
-            XYBluetoothDeviceFactory.addCreator(uuid: XYOBluetoothDevice.uuid, creator: XYOBluetoothDeviceCreator())
+            XYBluetoothDeviceFactory.addCreator(uuid: XyoBluetoothDevice.uuid, creator: XyoBluetoothDeviceCreator())
         } else {
-            XYBluetoothDeviceFactory.removeCreator(uuid: XYOBluetoothDevice.uuid)
+            XYBluetoothDeviceFactory.removeCreator(uuid: XyoBluetoothDevice.uuid)
         }
     }
 }
