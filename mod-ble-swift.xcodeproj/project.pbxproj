@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		68477558EE715E3389DAD705 /* Pods_mod_ble_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D337A2653A270FE9879488 /* Pods_mod_ble_swift.framework */; };
+		8C4EB777221CC91E00C238C4 /* XyoChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB776221CC91E00C238C4 /* XyoChar.swift */; };
+		8C4EB779221CC93A00C238C4 /* XyoCharManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB778221CC93A00C238C4 /* XyoCharManager.swift */; };
+		8C4EB77B221CC94F00C238C4 /* XyoAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB77A221CC94F00C238C4 /* XyoAdvertiser.swift */; };
 		8C924DB22210C956007FF765 /* mod_ble_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C924DA82210C956007FF765 /* mod_ble_swift.framework */; };
 		8C924DB92210C956007FF765 /* mod_ble_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C924DAB2210C956007FF765 /* mod_ble_swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C924DC32210C966007FF765 /* XyoBluetoothDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DC22210C966007FF765 /* XyoBluetoothDevice.swift */; };
@@ -30,6 +33,9 @@
 
 /* Begin PBXFileReference section */
 		01D337A2653A270FE9879488 /* Pods_mod_ble_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mod_ble_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C4EB776221CC91E00C238C4 /* XyoChar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoChar.swift; sourceTree = "<group>"; };
+		8C4EB778221CC93A00C238C4 /* XyoCharManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoCharManager.swift; sourceTree = "<group>"; };
+		8C4EB77A221CC94F00C238C4 /* XyoAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoAdvertiser.swift; sourceTree = "<group>"; };
 		8C924DA82210C956007FF765 /* mod_ble_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mod_ble_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C924DAB2210C956007FF765 /* mod_ble_swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mod_ble_swift.h; sourceTree = "<group>"; };
 		8C924DAC2210C956007FF765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,6 +109,9 @@
 				8C924DC22210C966007FF765 /* XyoBluetoothDevice.swift */,
 				8C924DC42210C96F007FF765 /* XyoService.swift */,
 				8C924DC62210C97E007FF765 /* XyoBluetoothDeviceCreator.swift */,
+				8C4EB776221CC91E00C238C4 /* XyoChar.swift */,
+				8C4EB778221CC93A00C238C4 /* XyoCharManager.swift */,
+				8C4EB77A221CC94F00C238C4 /* XyoAdvertiser.swift */,
 			);
 			path = "mod-ble-swift";
 			sourceTree = "<group>";
@@ -277,11 +286,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C4EB779221CC93A00C238C4 /* XyoCharManager.swift in Sources */,
+				8C4EB777221CC91E00C238C4 /* XyoChar.swift in Sources */,
 				8C924DC52210C96F007FF765 /* XyoService.swift in Sources */,
 				8C924DCC2210CA1A007FF765 /* XyoOutputStream.swift in Sources */,
 				8C924DC32210C966007FF765 /* XyoBluetoothDevice.swift in Sources */,
 				8C924DC72210C97E007FF765 /* XyoBluetoothDeviceCreator.swift in Sources */,
 				8C924DCA2210CA10007FF765 /* XyoInputStream.swift in Sources */,
+				8C4EB77B221CC94F00C238C4 /* XyoAdvertiser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,25 @@ import sdk_core_swift
 import mod_ble_swift
 
 
-class ViewController: UITableViewController, XYSmartScanDelegate {
+class ViewController: UITableViewController, XYSmartScanDelegate, XyoAdvertiserListener {
+    func onPipe(pipe: XyoNetworkPipe) {
+        print("ON PIPE")
+        let handler = XyoNetworkHandler(pipe: pipe)
+        
+        
+            DispatchQueue.global().async {
+                do {
+                    try self.originChainCreator.doNeogeoationThenBoundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff))
+                } catch {
+                    
+                }
+            }
+            
+       
+        
+       
+    }
+    
     private var boundWitness : XyoBoundWitness? = nil
     private var canUpdate = true
     private let hasher = XyoSha256()
@@ -22,17 +40,14 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
     private var originChainCreator : XyoRelayNode
     private var objects : [XYBluetoothDevice] = []
     private let scanner = XYSmartScan.instance
+    private var adv : XyoAdvertiser!
     
     
     required init?(coder aDecoder: NSCoder) {
-        
-        do {
-            try self.blockRepo = XyoStrageProviderOriginBlockRepository(storageProvider: storageProvider, hasher: hasher)
-            self.originChainCreator = XyoRelayNode(hasher: hasher, blockRepository: blockRepo)
-        } catch {
-            fatalError()
-        }
-        
+        self.blockRepo = XyoStrageProviderOriginBlockRepository(storageProvider: storageProvider, hasher: hasher)
+        self.originChainCreator = XyoRelayNode(hasher: hasher, blockRepository: blockRepo)
+        originChainCreator.originState.addSigner(signer: XyoStubSigner())
+      
         super.init(coder: aDecoder)
         
     }
@@ -52,16 +67,19 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
     }
     
     override func viewDidLoad() {
+        self.adv = XyoAdvertiser(l: (self as XyoAdvertiserListener))
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        XYOBluetoothDevice.family.enable(enable: true)
-        XYOBluetoothDeviceCreator.enable(enable: true)
+        XyoBluetoothDevice.family.enable(enable: true)
+        XyoBluetoothDeviceCreator.enable(enable: true)
         
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
+        
+        adv.start()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,7 +134,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate {
         
         //        cell.indicator.startAnimating()
         DispatchQueue.main.async {
-            guard let device = self.objects[indexPath.row] as? XYOBluetoothDevice else {
+            guard let device = self.objects[indexPath.row] as? XyoBluetoothDevice else {
                 return
             }
             
