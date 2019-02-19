@@ -2,15 +2,15 @@ PODS:
   - PromisesObjC (1.2.5)
   - PromisesSwift (1.2.5):
     - PromisesObjC (= 1.2.5)
-  - sdk-core-swift (0.1.2-beta.2):
+  - sdk-core-swift (0.1.2-beta.5):
     - sdk-objectmodel-swift (~> 0.1.1-beta.0)
-  - sdk-objectmodel-swift (0.1.2-beta.0)
+  - sdk-objectmodel-swift (0.1.2-beta.1)
   - XyBleSdk (0.0.1):
     - PromisesSwift (~> 1.2.4)
 
 DEPENDENCIES:
-  - sdk-core-swift (~> 0.1.2-beta.2)
-  - sdk-objectmodel-swift (~> 0.1.2-beta.0)
+  - sdk-core-swift (~> 0.1.2-beta.5)
+  - sdk-objectmodel-swift (~> 0.1.2-beta.1)
   - XyBleSdk (from `../sdk-ble-swift/`)
 
 SPEC REPOS:
@@ -27,10 +27,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   PromisesObjC: 2b402ef5333bb9b436c74ee1bd7dcb2511b68caf
   PromisesSwift: 63d93b8cc31b4245ca1014ff5cc24d6ae952a274
-  sdk-core-swift: c37533e70bc0901ba7bab4379ae8f1309e48c259
-  sdk-objectmodel-swift: c0ae76ff76772989d60a9ee9e53cd2ef24d8fb22
+  sdk-core-swift: 1947b47833d0889d54de13a6623b3f4fc7015ef7
+  sdk-objectmodel-swift: e65be212adbce07ed86f745a72f3bdf9fb1c373d
   XyBleSdk: 68eef398de0fa956199ba4b8e6a5cc59d7f98287
 
-PODFILE CHECKSUM: ec50a575e4ac8a350959b94e20f5223acd0e8626
+PODFILE CHECKSUM: f676f1b5f32a0b7806f7af7a6ca1201c01359e15
 
 COCOAPODS: 1.6.0
