@@ -137,8 +137,8 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
             .put(bytes: bytes)
             .toByteArray()
         
-        // TODO get the max chunk size
-        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes, maxChunkSize: 20)
+        let mtu = peripheral?.maximumWriteValueLength(for: CBCharacteristicWriteType.withResponse) ?? 22
+        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes, maxChunkSize: mtu - 3)
         
         for chunk in chunks {
             let status = self.set(XYOSerive.pipe, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
