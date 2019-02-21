@@ -21,18 +21,18 @@ public class XyoAdvertiser {
     private let l : XyoAdvertiserListener
     var services = [XYServiceCharacteristic]()
     let server = XYCBPeripheralManager.instance
-    private let service = XYMutableService(cbService: CBMutableService(type: XYOSerive.read.serviceUuid, primary: true))
+    private let service = XYMutableService(cbService: CBMutableService(type: XYOSerive.pipe.serviceUuid, primary: true))
     
     public init (l : XyoAdvertiserListener) {
         self.l = l
     }
     
     public func start () {
-        service.addCharacteristic(characteristic: XyoChar(listener: l))
+        service.addCharacteristic(characteristic: XyoPipeCharacteristic(listener: l))
         
         server.turnOn().then { (result) in
             if (result) {
-                let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: XYOSerive.read.serviceUuid.uuidString)!,
+                let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: XYOSerive.pipe.serviceUuid.uuidString)!,
                                             major: 1,
                                             minor: 1,
                                             identifier: "xyo")

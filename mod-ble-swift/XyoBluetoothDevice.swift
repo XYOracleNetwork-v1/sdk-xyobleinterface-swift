@@ -38,7 +38,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     
     public func tryCreatePipe () -> XyoNetworkPipe? {
         self.inputStream = XyoInputStream()
-        let result = self.subscribe(to: XYOSerive.read, delegate: (key: "noify", delegate: self))
+        let result = self.subscribe(to: XYOSerive.pipe, delegate: (key: "noify", delegate: self))
         if (result.error == nil) {
             return self
         }
@@ -81,7 +81,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
         let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes, maxChunkSize: 20)
         
         for chunk in chunks {
-            let status = self.set(XYOSerive.read, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
+            let status = self.set(XYOSerive.pipe, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
             
             if (status.error != nil) {
                 return nil
