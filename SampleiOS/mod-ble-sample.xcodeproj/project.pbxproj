@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4513321BC7C5DC42801507E8 /* Pods_mod_ble_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58190E3527E829B0FBC4B53F /* Pods_mod_ble_sample.framework */; };
+		8C4EB77D221E058F00C238C4 /* XyoLargeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB77C221E058F00C238C4 /* XyoLargeData.swift */; };
 		8C924DDD2210CCA8007FF765 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DDC2210CCA8007FF765 /* AppDelegate.swift */; };
 		8C924DDF2210CCA8007FF765 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DDE2210CCA8007FF765 /* ViewController.swift */; };
 		8C924DE22210CCA8007FF765 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C924DE02210CCA8007FF765 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		213796104C7132CDE1224419 /* Pods-mod-ble-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mod-ble-sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-mod-ble-sample/Pods-mod-ble-sample.release.xcconfig"; sourceTree = "<group>"; };
 		58190E3527E829B0FBC4B53F /* Pods_mod_ble_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mod_ble_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C4EB77C221E058F00C238C4 /* XyoLargeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoLargeData.swift; sourceTree = "<group>"; };
 		8C924DD92210CCA8007FF765 /* mod-ble-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mod-ble-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C924DDC2210CCA8007FF765 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C924DDE2210CCA8007FF765 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				8C924DF02210CE4A007FF765 /* ByteListViewController.swift */,
 				8C924DF22210CE5C007FF765 /* TableViewCellController.swift */,
 				8C924DF62210D25F007FF765 /* BytesTableViewCell.swift */,
+				8C4EB77C221E058F00C238C4 /* XyoLargeData.swift */,
 			);
 			path = "mod-ble-sample";
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				8C924DDF2210CCA8007FF765 /* ViewController.swift in Sources */,
 				8C924DDD2210CCA8007FF765 /* AppDelegate.swift in Sources */,
 				8C924DEF2210CE33007FF765 /* ByteItemViewController.swift in Sources */,
+				8C4EB77D221E058F00C238C4 /* XyoLargeData.swift in Sources */,
 				8C924DF12210CE4A007FF765 /* ByteListViewController.swift in Sources */,
 				8C924DF32210CE5C007FF765 /* TableViewCellController.swift in Sources */,
 				8C924DF72210D25F007FF765 /* BytesTableViewCell.swift in Sources */,

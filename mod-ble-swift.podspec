@@ -40,8 +40,8 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'PromisesSwift', '~> 1.2.4'
 
-  s.dependency 'sdk-objectmodel-swift',  '~> 0.1.2-beta.0'
-  s.dependency 'sdk-core-swift', '~> 0.1.2-beta.2'
+  s.dependency 'sdk-objectmodel-swift',  '~> 0.1.2-beta.1'
+  s.dependency 'sdk-core-swift', '~> 0.1.2-beta.5'
   s.dependency 'XyBleSdk'
 
   s.subspec 'XyBleSdk' do |ss|

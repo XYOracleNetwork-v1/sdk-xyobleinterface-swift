@@ -3,8 +3,8 @@ platform :ios, '11.0'
 use_frameworks!
 
 target 'mod-ble-sample' do
- 	pod 'sdk-objectmodel-swift', '~> 0.1.2-beta.0'
-    pod 'sdk-core-swift', '~> 0.1.2-beta.0'
+ 	pod 'sdk-objectmodel-swift', '~> 0.1.2-beta.1'
+    pod 'sdk-core-swift', '~> 0.1.2-beta.5'
     pod 'XyBleSdk', :path => '/Users/carterharrison/Documents/github/xyo/sdk-ble-swift/'
     pod 'mod-ble-swift', :path => '../'
     
