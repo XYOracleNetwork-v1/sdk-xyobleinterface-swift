@@ -15,21 +15,15 @@ import mod_ble_swift
 
 class ViewController: UITableViewController, XYSmartScanDelegate, XyoAdvertiserListener {
     func onPipe(pipe: XyoNetworkPipe) {
-        print("ON PIPE")
         let handler = XyoNetworkHandler(pipe: pipe)
         
-        
-            DispatchQueue.global().async {
-                do {
-                    try self.originChainCreator.doNeogeoationThenBoundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff))
-                } catch {
-                    
-                }
+        DispatchQueue.global().async {
+            do {
+                _ = try self.originChainCreator.doNeogeoationThenBoundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff))
+            } catch {
+                
             }
-            
-       
-        
-       
+        }
     }
     
     private var boundWitness : XyoBoundWitness? = nil
@@ -79,7 +73,9 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoAdvertiserL
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
         
+        originChainCreator.addHuerestic(key: "large", getter: XyoLargeData())
         adv.start()
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -11,7 +11,7 @@ import XyBleSdk
 import sdk_objectmodel_swift
 import sdk_core_swift
 
-class XyoChar : XYMutableCharacteristic, XyoCharManagerListener {
+class XyoChar : XYMutableCharacteristic, XyoGattServerLisitener {
     
     var cbCharacteristic: CBMutableCharacteristic = CBMutableCharacteristic(type: XYOSerive.read.characteristicUuid,
                                                                             properties: CBCharacteristicProperties(rawValue: CBCharacteristicProperties.read.rawValue |
@@ -22,7 +22,7 @@ class XyoChar : XYMutableCharacteristic, XyoCharManagerListener {
                                                                             permissions: CBAttributePermissions(rawValue: CBAttributePermissions.readable.rawValue | CBAttributePermissions.writeable.rawValue)
     )
     
-    var managers = [String : XyoCharManager] ()
+    var managers = [String : XyoGattServerNetworkPipe] ()
     private let listener : XyoAdvertiserListener
     
     init (listener : XyoAdvertiserListener) {
@@ -45,7 +45,7 @@ class XyoChar : XYMutableCharacteristic, XyoCharManagerListener {
                 
                 let catData = buffer.copyRangeOf(from: 4, to: buffer.getSize())
                 let advPacket = XyoAdvertisePacket(data: catData.toByteArray())
-                let pipe = XyoCharManager(initiationData: advPacket,
+                let pipe = XyoGattServerNetworkPipe(initiationData: advPacket,
                                           peripheral: peripheral,
                                           centrel: request.central,
                                           char: cbCharacteristic,

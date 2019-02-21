@@ -28,7 +28,7 @@ public class XyoAdvertiser {
     }
     
     public func start () {
-        service.addCharacteristic(characteristic: XyoChar(l: l))
+        service.addCharacteristic(characteristic: XyoChar(listener: l))
         
         server.turnOn().then { (result) in
             if (result) {
