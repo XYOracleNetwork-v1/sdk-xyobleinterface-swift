@@ -114,7 +114,7 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
     func handleWriteRequest(_ request: CBATTRequest, peripheral: CBPeripheralManager) {
         let value : [UInt8] = [UInt8](request.value ?? Data())
         
-        inputStream.addPacket(packet: value)
+        inputStream.addChunk(packet: value)
         peripheral.respond(to: request, withResult: .success)
         
         let newPacket = inputStream.getOldestPacket()

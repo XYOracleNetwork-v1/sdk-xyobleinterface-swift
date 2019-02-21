@@ -13,7 +13,7 @@ import sdk_core_swift
 import mod_ble_swift
 
 
-class ViewController: UITableViewController, XYSmartScanDelegate, XyoAdvertiserListener {
+class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharacteristicLisitner {
     func onPipe(pipe: XyoNetworkPipe) {
         let handler = XyoNetworkHandler(pipe: pipe)
         
@@ -34,7 +34,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoAdvertiserL
     private var originChainCreator : XyoRelayNode
     private var objects : [XYBluetoothDevice] = []
     private let scanner = XYSmartScan.instance
-    private var adv : XyoAdvertiser!
+    private var adv : XyoBluetoothServer!
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,7 +61,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoAdvertiserL
     }
     
     override func viewDidLoad() {
-        self.adv = XyoAdvertiser(l: (self as XyoAdvertiserListener))
+        self.adv = XyoBluetoothServer()
         super.viewDidLoad()
         
         tableView.dataSource = self
@@ -74,7 +74,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoAdvertiserL
         scanner.setDelegate(self, key: "main")
         
         originChainCreator.addHuerestic(key: "large", getter: XyoLargeData())
-        adv.start()
+        adv.start(listener: (self as XyoPipeCharacteristicLisitner))
         
     }
     

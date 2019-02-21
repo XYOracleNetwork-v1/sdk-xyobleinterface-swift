@@ -8,8 +8,14 @@
 
 import Foundation
 
-struct XyoOutputStream {
-    static func chunk (bytes : [UInt8], maxChunkSize : Int) -> [[UInt8]] {
+/// A simple struct to contain methods for outputing data over bluetooth
+public struct XyoOutputStream {
+    
+    /// This function chunks data into a max chunk size, this used for cutting up packets over bluetooth.
+    /// - Parameter bytes: The bytes to chunk up into the maxChunkSize
+    /// - Parameter maxChunkSize: The max number of bytes per chunk
+    /// - Returns: A collection of chunks made from the bytes.
+    public static func chunk (bytes : [UInt8], maxChunkSize : Int) -> [[UInt8]] {
         var chunks = [[UInt8]]()
         var currentChunk = [UInt8]()
         
@@ -21,7 +27,6 @@ struct XyoOutputStream {
                 currentChunk = [UInt8]()
             }
         }
-        
         
         return chunks
     }

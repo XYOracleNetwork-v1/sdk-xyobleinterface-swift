@@ -11,6 +11,7 @@ import XyBleSdk
 import sdk_objectmodel_swift
 import sdk_core_swift
 
+
 /// A class for managing the creation of pipes, the destructon of pipes, and the routing of write requests to pipes.
 class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
     
@@ -27,11 +28,11 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
     private var pipes = [String : XyoGattServerNetworkPipe] ()
     
     /// The listener to call back to after a pipe is created.
-    private let listener : XyoAdvertiserListener
+    private let listener : XyoPipeCharacteristicLisitner
     
     /// Creats a new instance of XyoPipeCharacteristic
     /// - Parameter listener: The listener to call back to when a new pipe is created.
-    init (listener : XyoAdvertiserListener) {
+    init (listener : XyoPipeCharacteristicLisitner) {
         self.listener = listener
     }
     
@@ -93,3 +94,11 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
     }
 }
 
+/// A simple protocol to call back to when a new pipe has been created.
+public protocol XyoPipeCharacteristicLisitner {
+    
+    /// This function will be called whenever a new pipe is created.
+    /// - Warning: Calls off of this pipe will be blocking
+    /// - Parameter pipe: The pipe that was just created with a centrel.
+    func onPipe (pipe: XyoNetworkPipe)
+}
