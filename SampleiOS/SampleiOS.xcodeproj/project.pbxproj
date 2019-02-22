@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4513321BC7C5DC42801507E8 /* Pods_mod_ble_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58190E3527E829B0FBC4B53F /* Pods_mod_ble_sample.framework */; };
+		591CADFEE5F41E33531EF490 /* Pods_SampleiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2D7F607708FC994A31D4EC /* Pods_SampleiOS.framework */; };
 		8C4EB77D221E058F00C238C4 /* XyoLargeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB77C221E058F00C238C4 /* XyoLargeData.swift */; };
 		8C924DDD2210CCA8007FF765 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DDC2210CCA8007FF765 /* AppDelegate.swift */; };
 		8C924DDF2210CCA8007FF765 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DDE2210CCA8007FF765 /* ViewController.swift */; };
@@ -24,7 +24,7 @@
 		213796104C7132CDE1224419 /* Pods-mod-ble-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mod-ble-sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-mod-ble-sample/Pods-mod-ble-sample.release.xcconfig"; sourceTree = "<group>"; };
 		58190E3527E829B0FBC4B53F /* Pods_mod_ble_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mod_ble_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4EB77C221E058F00C238C4 /* XyoLargeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoLargeData.swift; sourceTree = "<group>"; };
-		8C924DD92210CCA8007FF765 /* mod-ble-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mod-ble-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C924DD92210CCA8007FF765 /* SampleiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C924DDC2210CCA8007FF765 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C924DDE2210CCA8007FF765 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8C924DE12210CCA8007FF765 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,7 +35,10 @@
 		8C924DF02210CE4A007FF765 /* ByteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteListViewController.swift; sourceTree = "<group>"; };
 		8C924DF22210CE5C007FF765 /* TableViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellController.swift; sourceTree = "<group>"; };
 		8C924DF62210D25F007FF765 /* BytesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytesTableViewCell.swift; sourceTree = "<group>"; };
+		8E2D7F607708FC994A31D4EC /* Pods_SampleiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E63E2895E08B353E8B5A2A /* Pods-mod-ble-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mod-ble-sample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mod-ble-sample/Pods-mod-ble-sample.debug.xcconfig"; sourceTree = "<group>"; };
+		A95B1D589033CCF2C9F69382 /* Pods-SampleiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleiOS/Pods-SampleiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		F00788F97B67662323DB344A /* Pods-SampleiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleiOS/Pods-SampleiOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4513321BC7C5DC42801507E8 /* Pods_mod_ble_sample.framework in Frameworks */,
+				591CADFEE5F41E33531EF490 /* Pods_SampleiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				58190E3527E829B0FBC4B53F /* Pods_mod_ble_sample.framework */,
+				8E2D7F607708FC994A31D4EC /* Pods_SampleiOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -61,7 +65,7 @@
 		8C924DD02210CCA8007FF765 = {
 			isa = PBXGroup;
 			children = (
-				8C924DDB2210CCA8007FF765 /* mod-ble-sample */,
+				8C924DDB2210CCA8007FF765 /* SampleiOS */,
 				8C924DDA2210CCA8007FF765 /* Products */,
 				A42DDE2795C6C35387E657B7 /* Pods */,
 				5C0EF1208281FC142F5AA2D1 /* Frameworks */,
@@ -71,12 +75,12 @@
 		8C924DDA2210CCA8007FF765 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8C924DD92210CCA8007FF765 /* mod-ble-sample.app */,
+				8C924DD92210CCA8007FF765 /* SampleiOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8C924DDB2210CCA8007FF765 /* mod-ble-sample */ = {
+		8C924DDB2210CCA8007FF765 /* SampleiOS */ = {
 			isa = PBXGroup;
 			children = (
 				8C924DE02210CCA8007FF765 /* Main.storyboard */,
@@ -91,7 +95,7 @@
 				8C924DF62210D25F007FF765 /* BytesTableViewCell.swift */,
 				8C4EB77C221E058F00C238C4 /* XyoLargeData.swift */,
 			);
-			path = "mod-ble-sample";
+			path = SampleiOS;
 			sourceTree = "<group>";
 		};
 		A42DDE2795C6C35387E657B7 /* Pods */ = {
@@ -99,6 +103,8 @@
 			children = (
 				98E63E2895E08B353E8B5A2A /* Pods-mod-ble-sample.debug.xcconfig */,
 				213796104C7132CDE1224419 /* Pods-mod-ble-sample.release.xcconfig */,
+				A95B1D589033CCF2C9F69382 /* Pods-SampleiOS.debug.xcconfig */,
+				F00788F97B67662323DB344A /* Pods-SampleiOS.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -106,9 +112,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8C924DD82210CCA8007FF765 /* mod-ble-sample */ = {
+		8C924DD82210CCA8007FF765 /* SampleiOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8C924DEB2210CCA9007FF765 /* Build configuration list for PBXNativeTarget "mod-ble-sample" */;
+			buildConfigurationList = 8C924DEB2210CCA9007FF765 /* Build configuration list for PBXNativeTarget "SampleiOS" */;
 			buildPhases = (
 				6218F593EADF71D62856233C /* [CP] Check Pods Manifest.lock */,
 				8C924DD52210CCA8007FF765 /* Sources */,
@@ -120,9 +126,9 @@
 			);
 			dependencies = (
 			);
-			name = "mod-ble-sample";
+			name = SampleiOS;
 			productName = "mod-ble-sample";
-			productReference = 8C924DD92210CCA8007FF765 /* mod-ble-sample.app */;
+			productReference = 8C924DD92210CCA8007FF765 /* SampleiOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -140,7 +146,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8C924DD42210CCA8007FF765 /* Build configuration list for PBXProject "mod-ble-sample" */;
+			buildConfigurationList = 8C924DD42210CCA8007FF765 /* Build configuration list for PBXProject "SampleiOS" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -153,7 +159,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8C924DD82210CCA8007FF765 /* mod-ble-sample */,
+				8C924DD82210CCA8007FF765 /* SampleiOS */,
 			);
 		};
 /* End PBXProject section */
@@ -187,7 +193,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mod-ble-sample-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SampleiOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -202,13 +208,13 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-mod-ble-sample/Pods-mod-ble-sample-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SampleiOS/Pods-SampleiOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework",
 				"${BUILT_PRODUCTS_DIR}/XyBleSdk/XyBleSdk.framework",
-				"${BUILT_PRODUCTS_DIR}/mod-ble-swift/mod_ble_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/sdk-core-swift/sdk_core_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/sdk-objectmodel-swift/sdk_objectmodel_swift.framework",
+				"${BUILT_PRODUCTS_DIR}/sdk-xyobleinterface-swift/sdk_xyobleinterface_swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -217,13 +223,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Promises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XyBleSdk.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/mod_ble_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sdk_core_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sdk_objectmodel_swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sdk_xyobleinterface_swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mod-ble-sample/Pods-mod-ble-sample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleiOS/Pods-SampleiOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -383,12 +389,12 @@
 		};
 		8C924DEC2210CCA9007FF765 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98E63E2895E08B353E8B5A2A /* Pods-mod-ble-sample.debug.xcconfig */;
+			baseConfigurationReference = A95B1D589033CCF2C9F69382 /* Pods-SampleiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WA9VC4AR6Q;
-				INFOPLIST_FILE = "mod-ble-sample/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SampleiOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -403,12 +409,12 @@
 		};
 		8C924DED2210CCA9007FF765 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 213796104C7132CDE1224419 /* Pods-mod-ble-sample.release.xcconfig */;
+			baseConfigurationReference = F00788F97B67662323DB344A /* Pods-SampleiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WA9VC4AR6Q;
-				INFOPLIST_FILE = "mod-ble-sample/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SampleiOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -424,7 +430,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8C924DD42210CCA8007FF765 /* Build configuration list for PBXProject "mod-ble-sample" */ = {
+		8C924DD42210CCA8007FF765 /* Build configuration list for PBXProject "SampleiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C924DE92210CCA9007FF765 /* Debug */,
@@ -433,7 +439,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8C924DEB2210CCA9007FF765 /* Build configuration list for PBXNativeTarget "mod-ble-sample" */ = {
+		8C924DEB2210CCA9007FF765 /* Build configuration list for PBXNativeTarget "SampleiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C924DEC2210CCA9007FF765 /* Debug */,

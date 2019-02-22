@@ -10,58 +10,51 @@ import UIKit
 import CoreBluetooth
 import XyBleSdk
 import sdk_core_swift
-import mod_ble_swift
+import sdk_xyobleinterface_swift
 
 
+/// The primary view controller that maintains the list of device and handles bound witnesses.
+/// This view is used as a test app for doung bound witnesses with other XYO BLE enabled devices.
 class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharacteristicLisitner {
-    func onPipe(pipe: XyoNetworkPipe) {
-        let handler = XyoNetworkHandler(pipe: pipe)
-        
-        DispatchQueue.global().async {
-            do {
-                _ = try self.originChainCreator.doNeogeoationThenBoundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff))
-            } catch {
-                
-            }
-        }
-    }
-    
+    /// The current bound witness that is shown after a bound witness is done
     private var boundWitness : XyoBoundWitness? = nil
+    
+    /// If the table view can show more devices, this is set to false when a user chooses to connect to a device.
     private var canUpdate = true
+    
+    /// The hasher to create bound witnesses with, (previous hashes)
     private let hasher = XyoSha256()
+    
+    /// The place to store all of the origin blocks after they are created, this will be cleared after the view is recreated
     private let storageProvider = XyoInMemoryStorage()
+    
+    /// The interface for talking to the storageProvider to store orgin blocks.
     private var blockRepo : XyoStrageProviderOriginBlockRepository
+    
+    /// The node that handles all of the bound witnessing.
     private var originChainCreator : XyoRelayNode
-    private var objects : [XYBluetoothDevice] = []
+    
+    /// All of the current nearby devices to do bound witnesses with, this is the data in the listview.
+    private var devices : [XYBluetoothDevice] = []
+    
+    /// The scanner to scan for XYO devices
     private let scanner = XYSmartScan.instance
-    private var adv : XyoBluetoothServer!
     
+    /// The server to let other devices to connect to do bound witnesses.
+    private var server : XyoBluetoothServer!
     
+    /// The initer to init all of the XYO related objects.
     required init?(coder aDecoder: NSCoder) {
         self.blockRepo = XyoStrageProviderOriginBlockRepository(storageProvider: storageProvider, hasher: hasher)
         self.originChainCreator = XyoRelayNode(hasher: hasher, blockRepository: blockRepo)
         originChainCreator.originState.addSigner(signer: XyoStubSigner())
-      
-        super.init(coder: aDecoder)
         
+        super.init(coder: aDecoder)
     }
     
-    func smartScan(status: XYSmartScanStatus) {}
-    func smartScan(location: XYLocationCoordinate2D) {}
-    func smartScan(detected device: XYBluetoothDevice, signalStrength: Int, family: XYDeviceFamily) {}
-    func smartScan(entered device: XYBluetoothDevice) {}
-    func smartScan(exiting device: XYBluetoothDevice) {}
-    func smartScan(exited device: XYBluetoothDevice) {}
-    
-    func smartScan(detected devices: [XYBluetoothDevice], family: XYDeviceFamily) {
-        if (canUpdate) {
-            objects = devices
-            tableView.reloadData()
-        }
-    }
-    
+    /// This is called when the view loads, and enables the table view and starts the bluetooth
     override func viewDidLoad() {
-        self.adv = XyoBluetoothServer()
+        self.server = XyoBluetoothServer()
         super.viewDidLoad()
         
         tableView.dataSource = self
@@ -73,13 +66,41 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
         
-        originChainCreator.addHuerestic(key: "large", getter: XyoLargeData())
-        adv.start(listener: (self as XyoPipeCharacteristicLisitner))
+        originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 1000))
+        server.start(listener: (self as XyoPipeCharacteristicLisitner))
         
     }
     
+    /// This function is called whenever a pipe is made from the BLE server
+    func onPipe(pipe: XyoNetworkPipe) {
+        let handler = XyoNetworkHandler(pipe: pipe)
+        
+        DispatchQueue.global().async {
+            do {
+                self.boundWitness = try self.originChainCreator.doNeogeoationThenBoundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff))
+                
+                if (self.boundWitness != nil) {
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "showView", sender: self)
+                    }
+                }
+                
+            } catch {}
+        }
+    }
+    
+    
+    /// This is the function that notifies us of the devices nearby
+    func smartScan(detected devices: [XYBluetoothDevice], family: XYDeviceFamily) {
+        if (canUpdate) {
+            self.devices = devices
+            tableView.reloadData()
+        }
+    }
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return devices.count
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -101,11 +122,8 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
             if (segue.identifier == "showView") {
                 let upcoming: ByteListViewController = segue.destination as! ByteListViewController
                 
-                let indexPath = self.tableView.indexPathForSelectedRow!
-                
                 upcoming.items.append(ByteListViewController.ByteItem(title: "Bytes", desc: boundWitness?.getBuffer().toByteArray().toHexString() ?? "Error"))
                 upcoming.items.append(ByteListViewController.ByteItem(title: "Hash", desc: try boundWitness?.getHash(hasher: XyoSha256()).getBuffer().toByteArray().toHexString() ?? "Error"))
-                
                 
                 
                 let numberOfParties = try boundWitness?.getNumberOfParties() ?? 0
@@ -118,19 +136,26 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                     upcoming.items.append(ByteListViewController.ByteItem(title: "Witness " + String(i), desc: witness?.getBuffer().toByteArray().toHexString() ?? "Error"))
                 }
                 
-                
-                self.tableView.deselectRow(at: indexPath, animated: true)
+                deselectRow()
             }
         } catch {}
         
     }
     
+    private func deselectRow () {
+        DispatchQueue.main.async {
+            let indexPath = self.tableView.indexPathForSelectedRow
+            if (indexPath != nil) {
+                self.tableView.deselectRow(at: indexPath!, animated: true)
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.canUpdate = false
         
-        //        cell.indicator.startAnimating()
         DispatchQueue.main.async {
-            guard let device = self.objects[indexPath.row] as? XyoBluetoothDevice else {
+            guard let device = self.devices[indexPath.row] as? XyoBluetoothDevice else {
                 return
             }
             
@@ -148,11 +173,6 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                     self.canUpdate = true
                     XYCentral.instance.disconnect(from: device)
                     return
-                    // cell.indicator.stopAnimating()
-                }
-                
-                DispatchQueue.main.async {
-                    // cell.indicator.stopAnimating()
                 }
                 
             }.always {
@@ -164,5 +184,12 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         
     }
     
+    
+    func smartScan(status: XYSmartScanStatus) {}
+    func smartScan(location: XYLocationCoordinate2D) {}
+    func smartScan(detected device: XYBluetoothDevice, signalStrength: Int, family: XYDeviceFamily) {}
+    func smartScan(entered device: XYBluetoothDevice) {}
+    func smartScan(exiting device: XYBluetoothDevice) {}
+    func smartScan(exited device: XYBluetoothDevice) {}
 }
 

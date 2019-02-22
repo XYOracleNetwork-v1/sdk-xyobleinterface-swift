@@ -82,7 +82,25 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     /// - Returns: If the attatchment of the peripheral was sucessfull.
     override public func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
         guard
-            self.peripheral == nil,
+            self.peripheral == nil
+            else { return false }
+        
+        if (checkForName(peripheral) || checkForXyoUuid(peripheral)) {
+            // Set the peripheral and delegate to self
+            self.peripheral = peripheral.peripheral
+            self.peripheral?.delegate = self
+            
+            return true
+        }
+        
+        return false
+    }
+    
+    /// Checks to see if an advertisement contains the XYO service UUID
+    /// - Parameter peripheral: The device to check for the XYO service UUID.
+    /// - Returns: If the device is advertising the XYO service UUID.
+    private func checkForXyoUuid (_ peripheral: XYPeripheral) -> Bool {
+        guard
             let services = peripheral.advertisementData?[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID]
             else { return false }
         
@@ -90,15 +108,23 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
             services.contains(CBUUID(string: XyoBluetoothDevice.uuid))
             else { return false }
         
-        // Set the peripheral and delegate to self
-        self.peripheral = peripheral.peripheral
-        self.peripheral?.delegate = self
-        
-        // Save off the services this device was found with for BG monitoring
-        self.supportedServices = services
-        
         return true
+    }
+    
+    /// Checks to see if an advertisement contains the major and minor of this iBeacon device in the name.
+    /// - Parameter peripheral: The device to check for name.
+    /// - Returns: If the device contains the proper name.
+    private func checkForName (_ peripheral: XYPeripheral) -> Bool {
+        guard
+            let major = self.iBeacon?.major,
+            let minor = self.iBeacon?.minor,
+            let deviceName = peripheral.advertisementData?[CBAdvertisementDataLocalNameKey] as? String
+        else {
+            return false
+        }
         
+        let majorMinorName = XyoGattNameEncoder.encode(major: major, minor: minor)
+        return deviceName == majorMinorName
     }
     
     /// Gets the first data that was sent to this device, since the client is allways the one initing, this will
@@ -137,8 +163,8 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
             .put(bytes: bytes)
             .toByteArray()
         
-        // TODO get the max chunk size
-        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes, maxChunkSize: 20)
+        let mtu = peripheral?.maximumWriteValueLength(for: CBCharacteristicWriteType.withResponse) ?? 22
+        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes, maxChunkSize: mtu - 3)
         
         for chunk in chunks {
             let status = self.set(XYOSerive.pipe, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
@@ -159,11 +185,11 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     private func waitForRead () -> [UInt8]? {
         var latestPacket : [UInt8]? = inputStream.getOldestPacket()
         if (latestPacket == nil) {
-            recivePromise = Promise<[UInt8]?>.pending()
+            recivePromise = Promise<[UInt8]?>.pending().timeout(20)
             do {
                 latestPacket = try await(recivePromise.unsafelyUnwrapped)
             } catch {
-                // todo, look into seeing if there is a proper way to handle this error
+                // timeout has occored
                 return nil
             }
         }

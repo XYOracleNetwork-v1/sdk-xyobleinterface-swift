@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68477558EE715E3389DAD705 /* Pods_mod_ble_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D337A2653A270FE9879488 /* Pods_mod_ble_swift.framework */; };
-		8C4EB777221CC91E00C238C4 /* XyoChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB776221CC91E00C238C4 /* XyoChar.swift */; };
-		8C4EB779221CC93A00C238C4 /* XyoCharManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB778221CC93A00C238C4 /* XyoCharManager.swift */; };
-		8C4EB77B221CC94F00C238C4 /* XyoAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB77A221CC94F00C238C4 /* XyoAdvertiser.swift */; };
-		8C924DB22210C956007FF765 /* mod_ble_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C924DA82210C956007FF765 /* mod_ble_swift.framework */; };
-		8C924DB92210C956007FF765 /* mod_ble_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C924DAB2210C956007FF765 /* mod_ble_swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8C4EB777221CC91E00C238C4 /* XyoPipeCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */; };
+		8C4EB779221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB778221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift */; };
+		8C4EB77B221CC94F00C238C4 /* XyoBluetoothServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB77A221CC94F00C238C4 /* XyoBluetoothServer.swift */; };
+		8C924DB22210C956007FF765 /* sdk_xyobleinterface_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C924DA82210C956007FF765 /* sdk_xyobleinterface_swift.framework */; };
+		8C924DB92210C956007FF765 /* sdk_xyobleinterface_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C924DAB2210C956007FF765 /* sdk_xyobleinterface_swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C924DC32210C966007FF765 /* XyoBluetoothDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DC22210C966007FF765 /* XyoBluetoothDevice.swift */; };
 		8C924DC52210C96F007FF765 /* XyoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DC42210C96F007FF765 /* XyoService.swift */; };
 		8C924DC72210C97E007FF765 /* XyoBluetoothDeviceCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DC62210C97E007FF765 /* XyoBluetoothDeviceCreator.swift */; };
 		8C924DCA2210CA10007FF765 /* XyoInputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DC92210CA10007FF765 /* XyoInputStream.swift */; };
 		8C924DCC2210CA1A007FF765 /* XyoOutputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DCB2210CA1A007FF765 /* XyoOutputStream.swift */; };
 		8C924DCF2210CA66007FF765 /* XyoInputStreamTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DCE2210CA66007FF765 /* XyoInputStreamTest.swift */; };
+		C50D8CE602246146FD8DF672 /* Pods_sdk_xyobleinterface_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,13 +33,15 @@
 
 /* Begin PBXFileReference section */
 		01D337A2653A270FE9879488 /* Pods_mod_ble_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mod_ble_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C4EB776221CC91E00C238C4 /* XyoChar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoChar.swift; sourceTree = "<group>"; };
-		8C4EB778221CC93A00C238C4 /* XyoCharManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoCharManager.swift; sourceTree = "<group>"; };
-		8C4EB77A221CC94F00C238C4 /* XyoAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoAdvertiser.swift; sourceTree = "<group>"; };
-		8C924DA82210C956007FF765 /* mod_ble_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mod_ble_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C924DAB2210C956007FF765 /* mod_ble_swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mod_ble_swift.h; sourceTree = "<group>"; };
+		377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdk_xyobleinterface_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5739780399EEC56BF001438F /* Pods-sdk-xyobleinterface-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk-xyobleinterface-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdk-xyobleinterface-swift/Pods-sdk-xyobleinterface-swift.release.xcconfig"; sourceTree = "<group>"; };
+		8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoPipeCharacteristic.swift; sourceTree = "<group>"; };
+		8C4EB778221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoGattServerNetworkPipe.swift; sourceTree = "<group>"; };
+		8C4EB77A221CC94F00C238C4 /* XyoBluetoothServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoBluetoothServer.swift; sourceTree = "<group>"; };
+		8C924DA82210C956007FF765 /* sdk_xyobleinterface_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sdk_xyobleinterface_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C924DAB2210C956007FF765 /* sdk_xyobleinterface_swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sdk_xyobleinterface_swift.h; sourceTree = "<group>"; };
 		8C924DAC2210C956007FF765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C924DB12210C956007FF765 /* mod-ble-swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mod-ble-swiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C924DB12210C956007FF765 /* sdk-xyobleinterface-swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sdk-xyobleinterface-swiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C924DB82210C956007FF765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C924DC22210C966007FF765 /* XyoBluetoothDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoBluetoothDevice.swift; sourceTree = "<group>"; };
 		8C924DC42210C96F007FF765 /* XyoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoService.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		8C924DC92210CA10007FF765 /* XyoInputStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoInputStream.swift; sourceTree = "<group>"; };
 		8C924DCB2210CA1A007FF765 /* XyoOutputStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoOutputStream.swift; sourceTree = "<group>"; };
 		8C924DCE2210CA66007FF765 /* XyoInputStreamTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoInputStreamTest.swift; sourceTree = "<group>"; };
+		C7DA8516498310AEB6B81DC5 /* Pods-sdk-xyobleinterface-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk-xyobleinterface-swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdk-xyobleinterface-swift/Pods-sdk-xyobleinterface-swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DBDFC9F86E945DD581B819A8 /* Pods-mod-ble-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mod-ble-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-mod-ble-swift/Pods-mod-ble-swift.release.xcconfig"; sourceTree = "<group>"; };
 		EAB89E24A06184E50BE82FA4 /* Pods-mod-ble-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mod-ble-swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mod-ble-swift/Pods-mod-ble-swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68477558EE715E3389DAD705 /* Pods_mod_ble_swift.framework in Frameworks */,
+				C50D8CE602246146FD8DF672 /* Pods_sdk_xyobleinterface_swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C924DB22210C956007FF765 /* mod_ble_swift.framework in Frameworks */,
+				8C924DB22210C956007FF765 /* sdk_xyobleinterface_swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +79,8 @@
 			children = (
 				EAB89E24A06184E50BE82FA4 /* Pods-mod-ble-swift.debug.xcconfig */,
 				DBDFC9F86E945DD581B819A8 /* Pods-mod-ble-swift.release.xcconfig */,
+				C7DA8516498310AEB6B81DC5 /* Pods-sdk-xyobleinterface-swift.debug.xcconfig */,
+				5739780399EEC56BF001438F /* Pods-sdk-xyobleinterface-swift.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -83,8 +88,8 @@
 		8C924D9E2210C956007FF765 = {
 			isa = PBXGroup;
 			children = (
-				8C924DAA2210C956007FF765 /* mod-ble-swift */,
-				8C924DB52210C956007FF765 /* mod-ble-swiftTests */,
+				8C924DAA2210C956007FF765 /* sdk-xyobleinterface-swift */,
+				8C924DB52210C956007FF765 /* sdk-xyobleinterface-swiftTests */,
 				8C924DA92210C956007FF765 /* Products */,
 				6D782969A8B7A0C1ECE1546E /* Pods */,
 				AE10F3092A221FE9BCE484E7 /* Frameworks */,
@@ -94,35 +99,35 @@
 		8C924DA92210C956007FF765 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8C924DA82210C956007FF765 /* mod_ble_swift.framework */,
-				8C924DB12210C956007FF765 /* mod-ble-swiftTests.xctest */,
+				8C924DA82210C956007FF765 /* sdk_xyobleinterface_swift.framework */,
+				8C924DB12210C956007FF765 /* sdk-xyobleinterface-swiftTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8C924DAA2210C956007FF765 /* mod-ble-swift */ = {
+		8C924DAA2210C956007FF765 /* sdk-xyobleinterface-swift */ = {
 			isa = PBXGroup;
 			children = (
 				8C924DC82210C9FC007FF765 /* data */,
-				8C924DAB2210C956007FF765 /* mod_ble_swift.h */,
+				8C924DAB2210C956007FF765 /* sdk_xyobleinterface_swift.h */,
 				8C924DAC2210C956007FF765 /* Info.plist */,
 				8C924DC22210C966007FF765 /* XyoBluetoothDevice.swift */,
 				8C924DC42210C96F007FF765 /* XyoService.swift */,
 				8C924DC62210C97E007FF765 /* XyoBluetoothDeviceCreator.swift */,
-				8C4EB776221CC91E00C238C4 /* XyoChar.swift */,
-				8C4EB778221CC93A00C238C4 /* XyoCharManager.swift */,
-				8C4EB77A221CC94F00C238C4 /* XyoAdvertiser.swift */,
+				8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */,
+				8C4EB778221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift */,
+				8C4EB77A221CC94F00C238C4 /* XyoBluetoothServer.swift */,
 			);
-			path = "mod-ble-swift";
+			path = "sdk-xyobleinterface-swift";
 			sourceTree = "<group>";
 		};
-		8C924DB52210C956007FF765 /* mod-ble-swiftTests */ = {
+		8C924DB52210C956007FF765 /* sdk-xyobleinterface-swiftTests */ = {
 			isa = PBXGroup;
 			children = (
 				8C924DCD2210CA4C007FF765 /* data */,
 				8C924DB82210C956007FF765 /* Info.plist */,
 			);
-			path = "mod-ble-swiftTests";
+			path = "sdk-xyobleinterface-swiftTests";
 			sourceTree = "<group>";
 		};
 		8C924DC82210C9FC007FF765 /* data */ = {
@@ -146,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				01D337A2653A270FE9879488 /* Pods_mod_ble_swift.framework */,
+				377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,16 +163,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C924DB92210C956007FF765 /* mod_ble_swift.h in Headers */,
+				8C924DB92210C956007FF765 /* sdk_xyobleinterface_swift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8C924DA72210C956007FF765 /* mod-ble-swift */ = {
+		8C924DA72210C956007FF765 /* sdk-xyobleinterface-swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8C924DBC2210C956007FF765 /* Build configuration list for PBXNativeTarget "mod-ble-swift" */;
+			buildConfigurationList = 8C924DBC2210C956007FF765 /* Build configuration list for PBXNativeTarget "sdk-xyobleinterface-swift" */;
 			buildPhases = (
 				587D550AE9E5F5FCF7D03883 /* [CP] Check Pods Manifest.lock */,
 				8C924DA32210C956007FF765 /* Headers */,
@@ -178,14 +184,14 @@
 			);
 			dependencies = (
 			);
-			name = "mod-ble-swift";
+			name = "sdk-xyobleinterface-swift";
 			productName = "mod-ble-swift";
-			productReference = 8C924DA82210C956007FF765 /* mod_ble_swift.framework */;
+			productReference = 8C924DA82210C956007FF765 /* sdk_xyobleinterface_swift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8C924DB02210C956007FF765 /* mod-ble-swiftTests */ = {
+		8C924DB02210C956007FF765 /* sdk-xyobleinterface-swiftTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8C924DBF2210C956007FF765 /* Build configuration list for PBXNativeTarget "mod-ble-swiftTests" */;
+			buildConfigurationList = 8C924DBF2210C956007FF765 /* Build configuration list for PBXNativeTarget "sdk-xyobleinterface-swiftTests" */;
 			buildPhases = (
 				8C924DAD2210C956007FF765 /* Sources */,
 				8C924DAE2210C956007FF765 /* Frameworks */,
@@ -196,9 +202,9 @@
 			dependencies = (
 				8C924DB42210C956007FF765 /* PBXTargetDependency */,
 			);
-			name = "mod-ble-swiftTests";
+			name = "sdk-xyobleinterface-swiftTests";
 			productName = "mod-ble-swiftTests";
-			productReference = 8C924DB12210C956007FF765 /* mod-ble-swiftTests.xctest */;
+			productReference = 8C924DB12210C956007FF765 /* sdk-xyobleinterface-swiftTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -221,7 +227,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8C924DA22210C956007FF765 /* Build configuration list for PBXProject "mod-ble-swift" */;
+			buildConfigurationList = 8C924DA22210C956007FF765 /* Build configuration list for PBXProject "sdk-xyobleinterface-swift" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -233,8 +239,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8C924DA72210C956007FF765 /* mod-ble-swift */,
-				8C924DB02210C956007FF765 /* mod-ble-swiftTests */,
+				8C924DA72210C956007FF765 /* sdk-xyobleinterface-swift */,
+				8C924DB02210C956007FF765 /* sdk-xyobleinterface-swiftTests */,
 			);
 		};
 /* End PBXProject section */
@@ -272,7 +278,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-mod-ble-swift-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-sdk-xyobleinterface-swift-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -286,14 +292,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C4EB779221CC93A00C238C4 /* XyoCharManager.swift in Sources */,
-				8C4EB777221CC91E00C238C4 /* XyoChar.swift in Sources */,
+				8C4EB779221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift in Sources */,
+				8C4EB777221CC91E00C238C4 /* XyoPipeCharacteristic.swift in Sources */,
 				8C924DC52210C96F007FF765 /* XyoService.swift in Sources */,
 				8C924DCC2210CA1A007FF765 /* XyoOutputStream.swift in Sources */,
 				8C924DC32210C966007FF765 /* XyoBluetoothDevice.swift in Sources */,
 				8C924DC72210C97E007FF765 /* XyoBluetoothDeviceCreator.swift in Sources */,
 				8C924DCA2210CA10007FF765 /* XyoInputStream.swift in Sources */,
-				8C4EB77B221CC94F00C238C4 /* XyoAdvertiser.swift in Sources */,
+				8C4EB77B221CC94F00C238C4 /* XyoBluetoothServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,7 +316,7 @@
 /* Begin PBXTargetDependency section */
 		8C924DB42210C956007FF765 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8C924DA72210C956007FF765 /* mod-ble-swift */;
+			target = 8C924DA72210C956007FF765 /* sdk-xyobleinterface-swift */;
 			targetProxy = 8C924DB32210C956007FF765 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -440,7 +446,7 @@
 		};
 		8C924DBD2210C956007FF765 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EAB89E24A06184E50BE82FA4 /* Pods-mod-ble-swift.debug.xcconfig */;
+			baseConfigurationReference = C7DA8516498310AEB6B81DC5 /* Pods-sdk-xyobleinterface-swift.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -450,7 +456,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "mod-ble-swift/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/sdk-xyobleinterface-swift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -468,7 +474,7 @@
 		};
 		8C924DBE2210C956007FF765 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DBDFC9F86E945DD581B819A8 /* Pods-mod-ble-swift.release.xcconfig */;
+			baseConfigurationReference = 5739780399EEC56BF001438F /* Pods-sdk-xyobleinterface-swift.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -478,7 +484,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "mod-ble-swift/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/sdk-xyobleinterface-swift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -537,7 +543,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8C924DA22210C956007FF765 /* Build configuration list for PBXProject "mod-ble-swift" */ = {
+		8C924DA22210C956007FF765 /* Build configuration list for PBXProject "sdk-xyobleinterface-swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C924DBA2210C956007FF765 /* Debug */,
@@ -546,7 +552,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8C924DBC2210C956007FF765 /* Build configuration list for PBXNativeTarget "mod-ble-swift" */ = {
+		8C924DBC2210C956007FF765 /* Build configuration list for PBXNativeTarget "sdk-xyobleinterface-swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C924DBD2210C956007FF765 /* Debug */,
@@ -555,7 +561,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8C924DBF2210C956007FF765 /* Build configuration list for PBXNativeTarget "mod-ble-swiftTests" */ = {
+		8C924DBF2210C956007FF765 /* Build configuration list for PBXNativeTarget "sdk-xyobleinterface-swiftTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8C924DC02210C956007FF765 /* Debug */,

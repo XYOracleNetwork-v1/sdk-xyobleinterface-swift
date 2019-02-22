@@ -45,7 +45,7 @@ public struct XyoBluetoothServer {
     /// - Parameter listener: The callback to call when a pipe has been found, this can be called mutpile times.
     public func start (listener: XyoPipeCharacteristicLisitner) {
         service.addCharacteristic(characteristic: XyoPipeCharacteristic(listener: listener))
-        
+    
         server.turnOn().then { (result) in
             if (result) {
                 let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: XYOSerive.pipe.serviceUuid.uuidString)!,
@@ -53,7 +53,11 @@ public struct XyoBluetoothServer {
                                             minor: self.minor,
                                             identifier: "xyo")
                 
-                self.server.startAdvertiseing(advertisementUUIDs: [CBUUID(string: "1111")], deviceName: "nil", beacon: beacon)
+                
+                let name = XyoGattNameEncoder.encode(major: self.major, minor: self.minor)
+                
+            
+                self.server.startAdvertiseing(advertisementUUIDs: nil, deviceName: name, beacon: beacon)
                 self.server.addService(service: self.service)
             }
             

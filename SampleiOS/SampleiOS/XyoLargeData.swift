@@ -10,14 +10,19 @@ import Foundation
 import sdk_core_swift
 import sdk_objectmodel_swift
 
-class XyoLargeData : XyoHueresticGetter {
+struct XyoLargeData : XyoHueresticGetter {
+    private let numberOfBytes : UInt
+    
+    init(numberOfBytes : UInt) {
+        self.numberOfBytes = numberOfBytes
+    }
+    
     func getHeuristic() -> XyoObjectStructure? {
         var bytes = [UInt8]()
         
-        for i in 0...1000 {
+        for _ in 0...numberOfBytes {
             bytes.append(UInt8(0))
         }
-        
         
         return XyoObjectStructure.newInstance(schema: XyoSchemas.BLOB, bytes: XyoBuffer.init(data: bytes))
     }

@@ -63,11 +63,12 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
                 return currentPacet
             }
             
-            self.readPromise = Promise<[UInt8]?>.pending()
+            self.readPromise = Promise<[UInt8]?>.pending().timeout(20)
             
             do {
                 return try await(readPromise)
             } catch {
+                // timeout has occured
                 return nil
             }
         }
