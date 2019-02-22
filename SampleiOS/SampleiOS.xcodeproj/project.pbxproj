@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4513321BC7C5DC42801507E8 /* Pods_mod_ble_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58190E3527E829B0FBC4B53F /* Pods_mod_ble_sample.framework */; };
 		591CADFEE5F41E33531EF490 /* Pods_SampleiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2D7F607708FC994A31D4EC /* Pods_SampleiOS.framework */; };
 		8C4EB77D221E058F00C238C4 /* XyoLargeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB77C221E058F00C238C4 /* XyoLargeData.swift */; };
 		8C924DDD2210CCA8007FF765 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DDC2210CCA8007FF765 /* AppDelegate.swift */; };
@@ -47,7 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4513321BC7C5DC42801507E8 /* Pods_mod_ble_sample.framework in Frameworks */,
 				591CADFEE5F41E33531EF490 /* Pods_SampleiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +214,7 @@
 				"${BUILT_PRODUCTS_DIR}/XyBleSdk/XyBleSdk.framework",
 				"${BUILT_PRODUCTS_DIR}/sdk-core-swift/sdk_core_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/sdk-objectmodel-swift/sdk_objectmodel_swift.framework",
+				"${BUILT_PRODUCTS_DIR}/sdk-xyobleinterface-swift/sdk_xyobleinterface_swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -226,6 +225,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XyBleSdk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sdk_core_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sdk_objectmodel_swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sdk_xyobleinterface_swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -394,7 +394,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WA9VC4AR6Q;
-				INFOPLIST_FILE = "mod-ble-sample/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SampleiOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -414,7 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WA9VC4AR6Q;
-				INFOPLIST_FILE = "mod-ble-sample/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SampleiOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

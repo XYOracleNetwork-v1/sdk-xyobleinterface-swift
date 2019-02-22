@@ -1,28 +1,28 @@
 PODS:
-  - mod-ble-swift (0.1.1-beta.1):
-    - mod-ble-swift/XyBleSdk (= 0.1.1-beta.1)
-    - PromisesSwift (~> 1.2.4)
-    - sdk-core-swift (~> 0.1.2-beta.5)
-    - sdk-objectmodel-swift (~> 0.1.2-beta.1)
-    - XyBleSdk
-  - mod-ble-swift/XyBleSdk (0.1.1-beta.1):
-    - PromisesSwift (~> 1.2.4)
-    - sdk-core-swift (~> 0.1.2-beta.5)
-    - sdk-objectmodel-swift (~> 0.1.2-beta.1)
-    - XyBleSdk
   - PromisesObjC (1.2.6)
   - PromisesSwift (1.2.6):
     - PromisesObjC (= 1.2.6)
   - sdk-core-swift (0.1.2-beta.5):
     - sdk-objectmodel-swift (~> 0.1.1-beta.0)
   - sdk-objectmodel-swift (0.1.2-beta.1)
+  - sdk-xyobleinterface-swift (0.1.1-beta.1):
+    - PromisesSwift (~> 1.2.4)
+    - sdk-core-swift (~> 0.1.2-beta.5)
+    - sdk-objectmodel-swift (~> 0.1.2-beta.1)
+    - sdk-xyobleinterface-swift/XyBleSdk (= 0.1.1-beta.1)
+    - XyBleSdk
+  - sdk-xyobleinterface-swift/XyBleSdk (0.1.1-beta.1):
+    - PromisesSwift (~> 1.2.4)
+    - sdk-core-swift (~> 0.1.2-beta.5)
+    - sdk-objectmodel-swift (~> 0.1.2-beta.1)
+    - XyBleSdk
   - XyBleSdk (0.0.1):
     - PromisesSwift (~> 1.2.4)
 
 DEPENDENCIES:
-  - mod-ble-swift (from `../`)
   - sdk-core-swift (~> 0.1.2-beta.5)
   - sdk-objectmodel-swift (~> 0.1.2-beta.1)
+  - sdk-xyobleinterface-swift (from `../`)
   - XyBleSdk (from `/Users/carterharrison/Documents/github/xyo/sdk-ble-swift/`)
 
 SPEC REPOS:
@@ -33,19 +33,19 @@ SPEC REPOS:
     - sdk-objectmodel-swift
 
 EXTERNAL SOURCES:
-  mod-ble-swift:
+  sdk-xyobleinterface-swift:
     :path: "../"
   XyBleSdk:
     :path: "/Users/carterharrison/Documents/github/xyo/sdk-ble-swift/"
 
 SPEC CHECKSUMS:
-  mod-ble-swift: 7212f8667d526d8cc809ace861d72badbf6cddb7
   PromisesObjC: 60326422b6d692b9718a80666e67a9433862aa88
   PromisesSwift: b3219d5e6545d5d7e8ad8038b4ad139f7ee0b3f0
   sdk-core-swift: 1947b47833d0889d54de13a6623b3f4fc7015ef7
   sdk-objectmodel-swift: e65be212adbce07ed86f745a72f3bdf9fb1c373d
+  sdk-xyobleinterface-swift: 7b227aec3d4cc45d26811d6b1667ad8e56e276e7
   XyBleSdk: 68eef398de0fa956199ba4b8e6a5cc59d7f98287
 
-PODFILE CHECKSUM: d11cfed2b327dd4756c9b35ad9caa4b552b0259e
+PODFILE CHECKSUM: bd42c4798d948036662e30226cd2f4ab9db35167
 
 COCOAPODS: 1.6.0
