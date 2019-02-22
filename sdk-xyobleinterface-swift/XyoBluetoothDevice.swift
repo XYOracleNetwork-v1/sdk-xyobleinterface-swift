@@ -159,11 +159,11 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     private func waitForRead () -> [UInt8]? {
         var latestPacket : [UInt8]? = inputStream.getOldestPacket()
         if (latestPacket == nil) {
-            recivePromise = Promise<[UInt8]?>.pending()
+            recivePromise = Promise<[UInt8]?>.pending().timeout(20)
             do {
                 latestPacket = try await(recivePromise.unsafelyUnwrapped)
             } catch {
-                // todo, look into seeing if there is a proper way to handle this error
+                // timeout has occored
                 return nil
             }
         }

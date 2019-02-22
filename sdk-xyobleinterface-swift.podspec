@@ -25,12 +25,12 @@ TODO: Add long description of the pod here.
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE.txt' }
   s.author           = { 'Carter Harrison' => 'carterjharrison@gmail.com' }
-  s.source           = { :git => 'https://github.com/XYOracleNetwork/mod-ble-swift', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/XYOracleNetwork/sdk-xyobleinterface-swiftt', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '11.0'
 
-  s.source_files = 'mod-ble-swift/**/*.{swift}'
+  s.source_files = 'sdk-xyobleinterface-swift/**/*.{swift}'
   
   # s.resource_bundles = {
   #   'sdk-objectmodel-swift' => ['sdk-objectmodel-swift/Assets/*.png']
