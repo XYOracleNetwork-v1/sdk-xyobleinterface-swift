@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C3E6D6B2228A5F100A34A22 /* XyoGattNameEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3E6D6A2228A5F100A34A22 /* XyoGattNameEncoder.swift */; };
 		8C4EB777221CC91E00C238C4 /* XyoPipeCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */; };
 		8C4EB779221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB778221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift */; };
 		8C4EB77B221CC94F00C238C4 /* XyoBluetoothServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB77A221CC94F00C238C4 /* XyoBluetoothServer.swift */; };
@@ -35,6 +36,7 @@
 		01D337A2653A270FE9879488 /* Pods_mod_ble_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mod_ble_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdk_xyobleinterface_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5739780399EEC56BF001438F /* Pods-sdk-xyobleinterface-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk-xyobleinterface-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdk-xyobleinterface-swift/Pods-sdk-xyobleinterface-swift.release.xcconfig"; sourceTree = "<group>"; };
+		8C3E6D6A2228A5F100A34A22 /* XyoGattNameEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoGattNameEncoder.swift; sourceTree = "<group>"; };
 		8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoPipeCharacteristic.swift; sourceTree = "<group>"; };
 		8C4EB778221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoGattServerNetworkPipe.swift; sourceTree = "<group>"; };
 		8C4EB77A221CC94F00C238C4 /* XyoBluetoothServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoBluetoothServer.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				8C924DC92210CA10007FF765 /* XyoInputStream.swift */,
 				8C924DCB2210CA1A007FF765 /* XyoOutputStream.swift */,
+				8C3E6D6A2228A5F100A34A22 /* XyoGattNameEncoder.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			files = (
 				8C4EB779221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift in Sources */,
 				8C4EB777221CC91E00C238C4 /* XyoPipeCharacteristic.swift in Sources */,
+				8C3E6D6B2228A5F100A34A22 /* XyoGattNameEncoder.swift in Sources */,
 				8C924DC52210C96F007FF765 /* XyoService.swift in Sources */,
 				8C924DCC2210CA1A007FF765 /* XyoOutputStream.swift in Sources */,
 				8C924DC32210C966007FF765 /* XyoBluetoothDevice.swift in Sources */,

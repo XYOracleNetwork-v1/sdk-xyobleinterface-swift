@@ -16,7 +16,7 @@ import sdk_core_swift
 class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
     
     /// The CBMutableCharacteristic that complies with the XYO pipe protocal.
-    internal var cbCharacteristic: CBMutableCharacteristic = CBMutableCharacteristic(type: XYOSerive.pipe.characteristicUuid,
+    internal var cbCharacteristic: CBMutableCharacteristic = CBMutableCharacteristic(type: XyoService.pipe.characteristicUuid,
                                                                                     properties: CBCharacteristicProperties(rawValue: CBCharacteristicProperties.read.rawValue |
                                                                                         CBCharacteristicProperties.notify.rawValue |
                                                                                         CBCharacteristicProperties.indicate.rawValue |

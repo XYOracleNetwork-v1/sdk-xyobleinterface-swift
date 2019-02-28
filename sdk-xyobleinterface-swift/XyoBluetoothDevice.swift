@@ -68,7 +68,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
         self.inputStream = XyoInputStream()
         
         /// we use a unique name as the delegate key to prevent overriding keys
-        let result = self.subscribe(to: XYOSerive.pipe, delegate: (key: "notify [DBG: \(#function)]: \(Unmanaged.passUnretained(self).toOpaque())", delegate: self))
+        let result = self.subscribe(to: XyoService.pipe, delegate: (key: "notify [DBG: \(#function)]: \(Unmanaged.passUnretained(self).toOpaque())", delegate: self))
         if (result.error == nil) {
             return self
         }
@@ -142,7 +142,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     /// - Returns: Will return the response from the other party, will return nil if there was an error or if
     /// waitForResponse was set to false.
     public func send(data: [UInt8], waitForResponse: Bool) -> [UInt8]? {
-        if (!chunkSend(bytes: data)) {
+        if (!chunkSend(bytes: data, characteristic: XyoService.pipe, sizeOfChunkSize: XyoObjectSize.FOUR)) {
             return nil
         }
         
@@ -153,21 +153,61 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
         return nil
     }
     
-    /// Sends data to the peripheral at the other end of the pipe, via the XYO pipe protocol.
-    /// - Parameter bytes: The bytes to send to the other end of the pipe
+    /// This function changes the access password on the remove device
     /// - Warning: This function is blocking while it waits for bluetooth calls.
-    /// - Returns: This function returns the success of the chunk send
-    private func chunkSend (bytes : [UInt8]) -> Bool {
-        let sizeEncodedBytes = XyoBuffer()
-            .put(bits: UInt32(bytes.count + 4))
-            .put(bytes: bytes)
+    /// - Parameter oldPassword: The old password of the device so that you can change the password.
+    /// - Parameter newPassword: The new password to set if the oldPassword is correct.
+    /// - Returns: If the changing of password was successfull
+    public func changePassword (oldPassword: [UInt8], newPassword: [UInt8]) -> Bool {
+        let encoded = XyoBuffer()
+            .put(bits: UInt8(oldPassword.count + 1))
+            .put(bytes: oldPassword)
+            .put(bits: UInt8(newPassword.count + 1))
+            .put(bytes: newPassword)
             .toByteArray()
         
+        return chunkSend(bytes: encoded, characteristic: XyoService.password, sizeOfChunkSize: XyoObjectSize.ONE)
+    }
+    
+    /// This function changes the the bound witness data on the remote device.
+    /// - Warning: This function is blocking while it waits for bluetooth calls.
+    /// - Parameter password: The password on the remote device so that you can change its bound witness data
+    /// - Parameter boundWitnessData: The data to change on the remote device
+    /// - Returns: If the changing of bound witness data was successfull
+    public func changeBoundWitnessData (password: [UInt8], boundWitnessData: [UInt8]) -> Bool {
+        let encoded = XyoBuffer()
+            .put(bits: UInt8(password.count + 1))
+            .put(bytes: password)
+            .put(bits: UInt16(boundWitnessData.count + 1))
+            .put(bytes: boundWitnessData)
+            .toByteArray()
+        
+        return chunkSend(bytes: encoded, characteristic: XyoService.boundWitnessData, sizeOfChunkSize: XyoObjectSize.FOUR)
+    }
+    
+    /// Sends data to the peripheral at the other end of the pipe, via the XYO pipe protocol.
+    /// - Parameter bytes: The bytes to send to the other end of the pipe
+    /// - Parameter characteristic: The charistic to chunk write to
+    /// - Parameter sizeOfChunkSize: The number of bytes to prepend the size with when sening chunks
+    /// - Warning: This function is blocking while it waits for bluetooth calls.
+    /// - Returns: This function returns the success of the chunk send
+    private func chunkSend (bytes : [UInt8], characteristic: XYServiceCharacteristic, sizeOfChunkSize: XyoObjectSize) -> Bool {
+        let sizeEncodedBytes = XyoBuffer()
+        
+        switch sizeOfChunkSize {
+            case .ONE: sizeEncodedBytes.put(bits: UInt8(bytes.count + 1))
+            case .TWO: sizeEncodedBytes.put(bits: UInt16(bytes.count + 2))
+            case.FOUR: sizeEncodedBytes.put(bits: UInt32(bytes.count + 4))
+            case.EIGHT: sizeEncodedBytes.put(bits: UInt64(bytes.count + 8))
+        }
+        
+        sizeEncodedBytes.put(bytes: bytes)
+        
         let mtu = peripheral?.maximumWriteValueLength(for: CBCharacteristicWriteType.withResponse) ?? 22
-        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes, maxChunkSize: mtu - 3)
+        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes.toByteArray(), maxChunkSize: mtu - 3)
         
         for chunk in chunks {
-            let status = self.set(XYOSerive.pipe, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
+            let status = self.set(characteristic, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
             
             // break the loop if there was an error
             if (status.error != nil) {
