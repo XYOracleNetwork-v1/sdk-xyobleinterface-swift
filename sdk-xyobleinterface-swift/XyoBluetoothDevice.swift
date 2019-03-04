@@ -18,7 +18,6 @@ import sdk_objectmodel_swift
 /// one chould not use an instance of this class as a pipe, but tryCreatePipe() to get an instance of
 /// a pipe.
 public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
-    
     /// The defining family for a XyoBluetoothDevice, this helps the process of creatig a device, and making
     /// sure that it complies to the XYO pipe spec.
     public static let family = XYDeviceFamily.init(uuid: UUID(uuidString: XyoBluetoothDevice.uuid)!,
@@ -141,16 +140,18 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     /// - Parameter waitForResponse: Weather or not to wait for a response after sending
     /// - Returns: Will return the response from the other party, will return nil if there was an error or if
     /// waitForResponse was set to false.
-    public func send(data: [UInt8], waitForResponse: Bool) -> [UInt8]? {
+    public func send(data: [UInt8], waitForResponse: Bool, completion: @escaping ([UInt8]?) -> ()) {
         if (!chunkSend(bytes: data, characteristic: XyoService.pipe, sizeOfChunkSize: XyoObjectSize.FOUR)) {
-            return nil
+            completion(nil)
+            return
         }
         
         if (waitForResponse) {
-            return waitForRead()
+            completion(waitForRead())
+            return
         }
         
-        return nil
+        completion(nil)
     }
     
     /// This function changes the access password on the remove device

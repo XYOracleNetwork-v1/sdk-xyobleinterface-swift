@@ -47,6 +47,8 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
         return initiationData
     }
     
+    
+
     /// This function is used to send a recive data through the XYO Pipe. It sends data by sending notifactions,
     /// and recives data via a write requests.
     /// - Warning: This function is blocking as it waits for write requests.
@@ -54,26 +56,28 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
     /// - Parameter waitForResponse: If the the device should wait after connecting for a response (XYO write requests.)
     /// - Returns: Will return the response of the party at the other end of the pipe, this will be nil if no data
     /// was recived or if waitForResponse was set to false
-    func send(data: [UInt8], waitForResponse: Bool) -> [UInt8]? {
+    func send(data: [UInt8], waitForResponse: Bool, completion: @escaping ([UInt8]?) -> ()) {
         chunkSend(data: data)
         
         if (waitForResponse) {
             let currentPacet = inputStream.getOldestPacket()
             if (currentPacet != nil) {
-                return currentPacet
+                completion(currentPacet)
+                return
             }
             
             self.readPromise = Promise<[UInt8]?>.pending().timeout(20)
             
             do {
-                return try await(readPromise)
+                return completion(try await(readPromise))
             } catch {
                 // timeout has occured
-                return nil
+                completion(nil)
+                return
             }
         }
         
-        return nil
+        completion(nil)
     }
     
     /// This function should be called whenever a device disconnects or is no longer in use. Not calling
