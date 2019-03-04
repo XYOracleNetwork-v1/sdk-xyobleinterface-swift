@@ -43,10 +43,15 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     /// The server to let other devices to connect to do bound witnesses.
     private var server : XyoBluetoothServer!
     
+    
     /// The initer to init all of the XYO related objects.
     required init?(coder aDecoder: NSCoder) {
         self.blockRepo = XyoStrageProviderOriginBlockRepository(storageProvider: storageProvider, hasher: hasher)
-        self.originChainCreator = XyoRelayNode(hasher: hasher, blockRepository: blockRepo)
+        let originStateRepo = XyoStorageOriginChainStateRepository(storage: storageProvider)
+        let bridgeRepo = XyoStorageBridgeQueueRepository(storage: storageProvider)
+        let repositoryConfiguration = XyoRepositoryConfiguration(originState: originStateRepo, originBlock: self.blockRepo)
+        
+        self.originChainCreator = XyoRelayNode(hasher: hasher, repositoryConfiguration: repositoryConfiguration, queueRepository: bridgeRepo)
         originChainCreator.originState.addSigner(signer: XyoStubSigner())
         
         super.init(coder: aDecoder)
@@ -76,16 +81,16 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         let handler = XyoNetworkHandler(pipe: pipe)
         
         DispatchQueue.global().async {
-            do {
-                self.boundWitness = try self.originChainCreator.doNeogeoationThenBoundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff))
+            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
+                
+                self.boundWitness = boundWitness
                 
                 if (self.boundWitness != nil) {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "showView", sender: self)
                     }
                 }
-                
-            } catch {}
+            })
         }
     }
     
@@ -160,25 +165,22 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
             }
             
             device.connection {
-                do {
-                    guard let pipe = device.tryCreatePipe() else {
-                        return
-                    }
-                    
-                    let handler = XyoNetworkHandler(pipe: pipe)
-                    
-                    self.boundWitness = try self.originChainCreator.doNeogeoationThenBoundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff))
-                    
-                } catch {
-                    self.canUpdate = true
-                    XYCentral.instance.disconnect(from: device)
+                guard let pipe = device.tryCreatePipe() else {
                     return
                 }
                 
-            }.always {
-                self.canUpdate = true
-                XYCentral.instance.disconnect(from: device)
-                self.performSegue(withIdentifier: "showView", sender: self)
+                let handler = XyoNetworkHandler(pipe: pipe)
+                
+                
+                self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
+                    
+                    self.boundWitness = boundWitness
+                    self.canUpdate = true
+                    XYCentral.instance.disconnect(from: device)
+                    self.performSegue(withIdentifier: "showView", sender: self)
+                })
+                
+                
             }
         }
         
