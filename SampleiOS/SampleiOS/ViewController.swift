@@ -71,7 +71,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
         
-        originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 1000))
+        originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
         server.start(listener: (self as XyoPipeCharacteristicLisitner))
         
     }
@@ -84,7 +84,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
             self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
                 
                 self.boundWitness = boundWitness
-                
+                pipe.close()
                 if (self.boundWitness != nil) {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "showView", sender: self)
@@ -171,16 +171,17 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                 
                 let handler = XyoNetworkHandler(pipe: pipe)
                 
-                
                 self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
+                    
                     
                     self.boundWitness = boundWitness
                     self.canUpdate = true
                     XYCentral.instance.disconnect(from: device)
-                    self.performSegue(withIdentifier: "showView", sender: self)
+                    
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "showView", sender: self)
+                    }
                 })
-                
-                
             }
         }
         

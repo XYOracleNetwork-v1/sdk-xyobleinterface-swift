@@ -35,9 +35,9 @@ public struct XyoBluetoothDeviceCreator : XYDeviceCreator {
     /// - Parameter enable: If true, will enable. If false, will disbale.
     public static func enable (enable : Bool) {
         if (enable) {
-            XYBluetoothDeviceFactory.addCreator(uuid: XyoBluetoothDevice.uuid, creator: XyoBluetoothDeviceCreator())
+            XYBluetoothDeviceFactory.addCreator(uuid: XyoBluetoothDevice.uuid.lowercased(), creator: XyoBluetoothDeviceCreator())
         } else {
-            XYBluetoothDeviceFactory.removeCreator(uuid: XyoBluetoothDevice.uuid)
+            XYBluetoothDeviceFactory.removeCreator(uuid: XyoBluetoothDevice.uuid.lowercased())
         }
     }
 }

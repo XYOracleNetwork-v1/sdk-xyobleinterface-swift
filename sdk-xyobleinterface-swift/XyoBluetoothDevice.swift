@@ -29,7 +29,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     public static let id = "XYO"
     
     /// The primary service UUID of a XyoBluetoothDevice
-    public static let uuid : String = "dddddddd-df36-484e-bc98-2d5398c5593e"
+    public static let uuid : String = XyoService.pipe.serviceUuid.uuidString
     
     /// The faimly name of a XyoBluetoothDevice
     public static let familyName : String = "XYO"
