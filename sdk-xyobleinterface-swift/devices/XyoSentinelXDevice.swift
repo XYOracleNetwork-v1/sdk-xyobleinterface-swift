@@ -19,7 +19,7 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
         
         let flags = XyoBuffer()
             .put(bits: minor)
-            .getUInt8(offset: 0)
+            .getUInt8(offset: 1)
         
         
         return flags != 0

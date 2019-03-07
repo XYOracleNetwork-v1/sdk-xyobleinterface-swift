@@ -54,12 +54,12 @@ public struct XyoBluetoothDeviceCreator : XYDeviceCreator {
     }
     
     private func getXyoManufactorIdFromIbeacon (iBeacon: XYIBeaconDefinition) -> UInt8? {
-        guard let minor = iBeacon.minor else {
+        guard let major = iBeacon.major else {
             return nil
         }
         
         return XyoBuffer()
-            .put(bits: minor)
-            .getUInt8(offset: 0)
+            .put(bits: major)
+            .getUInt8(offset: 1)
     }
 }
