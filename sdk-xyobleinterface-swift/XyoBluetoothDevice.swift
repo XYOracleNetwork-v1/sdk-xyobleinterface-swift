@@ -18,7 +18,6 @@ import sdk_objectmodel_swift
 /// one chould not use an instance of this class as a pipe, but tryCreatePipe() to get an instance of
 /// a pipe.
 public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
-    
     /// The defining family for a XyoBluetoothDevice, this helps the process of creatig a device, and making
     /// sure that it complies to the XYO pipe spec.
     public static let family = XYDeviceFamily.init(uuid: UUID(uuidString: XyoBluetoothDevice.uuid)!,
@@ -30,7 +29,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     public static let id = "XYO"
     
     /// The primary service UUID of a XyoBluetoothDevice
-    public static let uuid : String = "dddddddd-df36-484e-bc98-2d5398c5593e"
+    public static let uuid : String = XyoService.pipe.serviceUuid.uuidString
     
     /// The faimly name of a XyoBluetoothDevice
     public static let familyName : String = "XYO"
@@ -68,7 +67,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
         self.inputStream = XyoInputStream()
         
         /// we use a unique name as the delegate key to prevent overriding keys
-        let result = self.subscribe(to: XYOSerive.pipe, delegate: (key: "notify [DBG: \(#function)]: \(Unmanaged.passUnretained(self).toOpaque())", delegate: self))
+        let result = self.subscribe(to: XyoService.pipe, delegate: (key: "notify [DBG: \(#function)]: \(Unmanaged.passUnretained(self).toOpaque())", delegate: self))
         if (result.error == nil) {
             return self
         }
@@ -141,33 +140,43 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     /// - Parameter waitForResponse: Weather or not to wait for a response after sending
     /// - Returns: Will return the response from the other party, will return nil if there was an error or if
     /// waitForResponse was set to false.
-    public func send(data: [UInt8], waitForResponse: Bool) -> [UInt8]? {
-        if (!chunkSend(bytes: data)) {
-            return nil
+    public func send(data: [UInt8], waitForResponse: Bool, completion: @escaping ([UInt8]?) -> ()) {
+        if (!chunkSend(bytes: data, characteristic: XyoService.pipe, sizeOfChunkSize: XyoObjectSize.FOUR)) {
+            completion(nil)
+            return
         }
         
         if (waitForResponse) {
-            return waitForRead()
+            completion(waitForRead())
+            return
         }
         
-        return nil
+        completion(nil)
     }
     
     /// Sends data to the peripheral at the other end of the pipe, via the XYO pipe protocol.
     /// - Parameter bytes: The bytes to send to the other end of the pipe
+    /// - Parameter characteristic: The charistic to chunk write to
+    /// - Parameter sizeOfChunkSize: The number of bytes to prepend the size with when sening chunks
     /// - Warning: This function is blocking while it waits for bluetooth calls.
     /// - Returns: This function returns the success of the chunk send
-    private func chunkSend (bytes : [UInt8]) -> Bool {
+    func chunkSend (bytes : [UInt8], characteristic: XYServiceCharacteristic, sizeOfChunkSize: XyoObjectSize) -> Bool {
         let sizeEncodedBytes = XyoBuffer()
-            .put(bits: UInt32(bytes.count + 4))
-            .put(bytes: bytes)
-            .toByteArray()
+        
+        switch sizeOfChunkSize {
+            case .ONE: sizeEncodedBytes.put(bits: UInt8(bytes.count + 1))
+            case .TWO: sizeEncodedBytes.put(bits: UInt16(bytes.count + 2))
+            case.FOUR: sizeEncodedBytes.put(bits: UInt32(bytes.count + 4))
+            case.EIGHT: sizeEncodedBytes.put(bits: UInt64(bytes.count + 8))
+        }
+        
+        sizeEncodedBytes.put(bytes: bytes)
         
         let mtu = peripheral?.maximumWriteValueLength(for: CBCharacteristicWriteType.withResponse) ?? 22
-        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes, maxChunkSize: mtu - 3)
+        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes.toByteArray(), maxChunkSize: mtu - 3)
         
         for chunk in chunks {
-            let status = self.set(XYOSerive.pipe, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
+            let status = self.set(characteristic, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
             
             // break the loop if there was an error
             if (status.error != nil) {

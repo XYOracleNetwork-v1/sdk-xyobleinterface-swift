@@ -3,8 +3,8 @@ platform :ios, '11.0'
 use_frameworks!
 
 target 'SampleiOS' do
- 	pod 'sdk-objectmodel-swift', '~> 0.1.2-beta.1'
-    pod 'sdk-core-swift', '~> 0.1.2-beta.5'
+ 	pod 'sdk-objectmodel-swift', '~> 0.1.2-beta.3'
+    pod 'sdk-core-swift', '~> 0.1.4-beta.6'
     pod 'XyBleSdk', :path => '/Users/carterharrison/Documents/github/xyo/sdk-ble-swift/'
     pod 'sdk-xyobleinterface-swift', :path => '../'
     

@@ -26,7 +26,7 @@ public struct XyoBluetoothServer {
     private let server = XYCBPeripheralManager.instance
     
     /// The mutable service to use for the XYO pipes.
-    private let service = XYMutableService(cbService: CBMutableService(type: XYOSerive.pipe.serviceUuid, primary: true))
+    private let service = XYMutableService(cbService: CBMutableService(type: XyoService.pipe.serviceUuid, primary: true))
     
     /// Creates a new instance of this class with a ranom major and a random minor.
     public init () {
@@ -48,7 +48,7 @@ public struct XyoBluetoothServer {
     
         server.turnOn().then { (result) in
             if (result) {
-                let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: XYOSerive.pipe.serviceUuid.uuidString)!,
+                let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: XyoService.pipe.serviceUuid.uuidString)!,
                                             major: self.major,
                                             minor: self.minor,
                                             identifier: "xyo")
@@ -56,7 +56,7 @@ public struct XyoBluetoothServer {
                 
                 let name = XyoGattNameEncoder.encode(major: self.major, minor: self.minor)
                 
-                self.server.startAdvertiseing(advertisementUUIDs: nil, deviceName: name, beacon: beacon)
+                self.server.startAdvertiseing(advertisementUUIDs: [XyoService.pipe.serviceUuid], deviceName: name, beacon: beacon)
                 self.server.addService(service: self.service)
             }
             
