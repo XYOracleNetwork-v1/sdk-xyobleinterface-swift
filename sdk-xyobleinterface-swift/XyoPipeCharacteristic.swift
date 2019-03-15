@@ -71,7 +71,10 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
             let buffer = XyoBuffer(data: value)
             let sizeOfCat = buffer.getUInt8(offset: 4)
             
-            if (sizeOfCat != value.count - 5) { return false }
+            print(value.toHexString())
+            if (sizeOfCat != value.count - 5) {
+                return false
+            }
             
             let catData = buffer.copyRangeOf(from: 4, to: buffer.getSize())
             let advPacket = XyoAdvertisePacket(data: catData.toByteArray())

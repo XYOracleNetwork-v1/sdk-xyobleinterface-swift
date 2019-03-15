@@ -48,6 +48,7 @@ public struct XyoBluetoothServer {
     
         server.turnOn().then { (result) in
             if (result) {
+                
                 let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: XyoService.pipe.serviceUuid.uuidString)!,
                                             major: self.major,
                                             minor: self.minor,

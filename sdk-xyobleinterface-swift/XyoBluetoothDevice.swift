@@ -17,7 +17,7 @@ import sdk_objectmodel_swift
 /// XyoNetworkPipe interface, meaning that data can be send and recived beetwen them. Please note that
 /// one chould not use an instance of this class as a pipe, but tryCreatePipe() to get an instance of
 /// a pipe.
-public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
+open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
     /// The defining family for a XyoBluetoothDevice, this helps the process of creatig a device, and making
     /// sure that it complies to the XYO pipe spec.
     public static let family = XYDeviceFamily.init(uuid: UUID(uuidString: XyoBluetoothDevice.uuid)!,
@@ -79,7 +79,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     /// device has a XYO UUID in the advertisement
     /// - Parameter peripheral: The XYO pipe enabled peripheral to try and attatch
     /// - Returns: If the attatchment of the peripheral was sucessfull.
-    override public func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
+    override open func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
         guard
             self.peripheral == nil
             else { return false }

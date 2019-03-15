@@ -96,6 +96,9 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
             .put(bits: UInt32(data.count + 4))
             .put(bytes: data)
             .toByteArray()
+        
+        
+        print("Sending Entire:" + sizeEncoded.toHexString())
         let chunks = XyoOutputStream.chunk(bytes: sizeEncoded, maxChunkSize: centrel.maximumUpdateValueLength - 3)
         
         for chunk in chunks {

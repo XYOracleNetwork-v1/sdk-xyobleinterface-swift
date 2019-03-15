@@ -8,6 +8,7 @@
 
 import Foundation
 import sdk_objectmodel_swift
+import XyBleSdk
 
 public class XyoSentinelXDevice : XyoBluetoothDevice {
     
@@ -22,8 +23,36 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
             .getUInt8(offset: 1)
         
         
-        return flags != 0
+        return flags & 1 != 0
+    }
+    
+    public func isButtonPressed () -> Bool {
+        guard let minor = self.iBeacon?.minor else {
+            return true
+        }
         
+        let flags = XyoBuffer()
+            .put(bits: minor)
+            .getUInt8(offset: 1)
+        
+        return flags & 2 != 0
+    }
+    
+    public override func detected() {
+        if (isButtonPressed()) {
+            XyoSentinelXManager.reportEvent(device: self, event: XyoSentinelXManager.Events.buttonpressed)
+        }
+    }
+    
+    public func reset (password: [UInt8]) -> Bool {
+        let ecoded = XyoBuffer()
+            .put(bits: UInt8(password.count + 1))
+            .put(bytes: password)
+            .toByteArray()
+        
+        let toSend = XYBluetoothResult(data: Data(ecoded))
+        
+        return self.set(XyoService.pipe, value: toSend).error == nil
     }
     
     /// This function changes the access password on the remove device

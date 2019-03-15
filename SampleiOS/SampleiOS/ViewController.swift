@@ -71,7 +71,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
         
-        originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
+        // originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
         server.start(listener: (self as XyoPipeCharacteristicLisitner))
         
     }
@@ -121,6 +121,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "XYO Devices"
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         do {
