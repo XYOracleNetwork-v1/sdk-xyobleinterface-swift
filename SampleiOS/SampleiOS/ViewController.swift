@@ -74,6 +74,14 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         // originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
         server.start(listener: (self as XyoPipeCharacteristicLisitner))
         
+        XyoSentinelXManager.addListener(key: "main") { (device, event) in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Button pressed", message: "pressed!", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     /// This function is called whenever a pipe is made from the BLE server
