@@ -11,6 +11,7 @@ import sdk_objectmodel_swift
 import XyBleSdk
 
 public class XyoSentinelXDevice : XyoBluetoothDevice {
+    private var lastButtonPressTime : Date? = nil
     
     
     public func isClaimed () -> Bool {
@@ -21,7 +22,6 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
         let flags = XyoBuffer()
             .put(bits: minor)
             .getUInt8(offset: 1)
-        
         
         return flags & 1 != 0
     }
@@ -38,8 +38,17 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
         return flags & 2 != 0
     }
     
+    private func isButtonPressTimeoutDone () -> Bool {
+        guard let time = lastButtonPressTime else {
+            return true
+        }
+        
+        return time.timeIntervalSinceNow < TimeInterval(exactly: -10000)!
+    }
+    
     public override func detected() {
-        if (isButtonPressed()) {
+        if (isButtonPressed() && isButtonPressTimeoutDone()) {
+            self.lastButtonPressTime = Date()
             XyoSentinelXManager.reportEvent(device: self, event: XyoSentinelXManager.Events.buttonpressed)
         }
     }

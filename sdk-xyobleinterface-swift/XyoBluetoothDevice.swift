@@ -71,7 +71,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         if (result.error == nil) {
             return self
         }
-        
+
         return nil
     }
     
@@ -203,6 +203,8 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
             }
         }
         
+        inputStream.removePacket()
+        
         return latestPacket
     }
     
@@ -217,7 +219,6 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
     /// - Parameter value: The value that characteristic has been changed to (or notifyed of)
     public func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
         if (!value.hasError && value.asByteArray != nil) {
-            
             inputStream.addChunk(packet: value.asByteArray!)
             
             guard let donePacket = inputStream.getOldestPacket() else {

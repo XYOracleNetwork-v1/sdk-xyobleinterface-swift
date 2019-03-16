@@ -67,6 +67,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         
         XyoBluetoothDevice.family.enable(enable: true)
         XyoBluetoothDeviceCreator.enable(enable: true)
+        XyoSentinelXDeviceCreator().enable(enable: true)
         
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
