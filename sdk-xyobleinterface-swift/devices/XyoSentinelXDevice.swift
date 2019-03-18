@@ -95,4 +95,8 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
         
         return chunkSend(bytes: encoded, characteristic: XyoService.boundWitnessData, sizeOfChunkSize: XyoObjectSize.FOUR)
     }
+    
+    public func getBoundWitnessData () -> [UInt8]? {
+        return self.get(XyoService.boundWitnessData).asByteArray
+    }
 }
