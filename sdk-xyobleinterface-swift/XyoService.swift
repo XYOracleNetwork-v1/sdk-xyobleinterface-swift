@@ -20,6 +20,9 @@ public enum XyoService : XYServiceCharacteristic {
     
     /// This is the characteristic to change bound witness data of a device
     case boundWitnessData
+
+    /// For reseting the device
+    case factoryReset
     
     /// The display name of the service.
     public var serviceDisplayName: String {
@@ -39,8 +42,9 @@ public enum XyoService : XYServiceCharacteristic {
     public var characteristicUuid: CBUUID {
         switch self {
         case .pipe: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa456490b2d")
-        case.password: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa456500b2d")
-        case.boundWitnessData: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa456510b2d")
+        case .password: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564A0b2d")
+        case .boundWitnessData: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564B0b2d")
+        case .factoryReset: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564C0b2d")
         }
     }
     
@@ -52,7 +56,8 @@ public enum XyoService : XYServiceCharacteristic {
         switch self {
         case .pipe: return "XYO Pipe"
         case .password: return "Change Password"
-        case.boundWitnessData: return "Change Bound Witness Data"
+        case .boundWitnessData: return "Change Bound Witness Data"
+        case .factoryReset: return "Change Bound Witness Data"
         }
     }
     
