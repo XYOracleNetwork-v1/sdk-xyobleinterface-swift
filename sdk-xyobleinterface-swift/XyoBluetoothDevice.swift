@@ -213,6 +213,13 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         disconnect()
     }
     
+    public func getNetworkHuerestics() -> [XyoObjectStructure] {
+        let unsignedRssi = UInt8((self.rssi * 1) + 126)
+        let rssiTag = XyoObjectStructure.newInstance(schema: XyoSchemas.RSSI, bytes: XyoBuffer().put(bits: (unsignedRssi)))
+        
+        return [rssiTag]
+    }
+    
     /// This function is called whenever a charisteristic is updated, and is how the XYO pipe recives data.
     /// This function will also add to the input stream, and resume a read promise if there is one existing.
     /// - Parameter serviceCharacteristic: The characteristic that is being updated, this should be the XYO serivce

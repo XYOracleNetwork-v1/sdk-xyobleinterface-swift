@@ -132,6 +132,10 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
         }
     }
     
+    func getNetworkHuerestics() -> [XyoObjectStructure] {
+        return []
+    }
+    
 }
 
 /// This protocal is a simple callback interface to listen in on the pipe.

@@ -52,7 +52,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         let repositoryConfiguration = XyoRepositoryConfiguration(originState: originStateRepo, originBlock: self.blockRepo)
         
         self.originChainCreator = XyoRelayNode(hasher: hasher, repositoryConfiguration: repositoryConfiguration, queueRepository: bridgeRepo)
-        originChainCreator.originState.addSigner(signer: XyoStubSigner())
+        originChainCreator.originState.addSigner(signer: XyoSecp256k1Signer())
         
         super.init(coder: aDecoder)
     }
@@ -90,7 +90,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         let handler = XyoNetworkHandler(pipe: pipe)
         
         DispatchQueue.global().async {
-            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
+            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0x01, withOther: 0x01), completion: { (boundWitness, error) in
                 
                 self.boundWitness = boundWitness
                 pipe.close()
