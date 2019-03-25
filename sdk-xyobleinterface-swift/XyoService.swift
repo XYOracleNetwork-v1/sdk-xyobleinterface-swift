@@ -37,7 +37,7 @@ public enum XyoService : XYServiceCharacteristic {
     // e3955c8935d2-89cb-e484-63fd-e253486d
     // ffffffff-df36-484e-bc98-2d5398c5593e
     public var serviceUuid: CBUUID {
-        return CBUUID(string: "ffffffff-df36-484e-bc98-2d5398c5593e")
+        return CBUUID(string: "d684352e-df36-484e-bc98-2d5398c5593e")
         
     }
     
