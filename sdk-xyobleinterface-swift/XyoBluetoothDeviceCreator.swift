@@ -58,8 +58,11 @@ public struct XyoBluetoothDeviceCreator : XYDeviceCreator {
             return nil
         }
         
-        return XyoBuffer()
+        let byte = XyoBuffer()
             .put(bits: major)
             .getUInt8(offset: 1)
+        
+        // masks the byte with 00111111
+        return byte & 0x3f
     }
 }
