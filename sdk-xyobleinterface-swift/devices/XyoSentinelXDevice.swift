@@ -99,4 +99,8 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
     public func getBoundWitnessData () -> [UInt8]? {
         return self.get(XyoService.boundWitnessData).asByteArray
     }
+    
+    public func getPublicKey () -> [UInt8]? {
+        return self.get(XyoService.publicKey).asByteArray
+    }
 }
