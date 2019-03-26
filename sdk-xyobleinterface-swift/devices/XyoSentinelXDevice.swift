@@ -34,7 +34,7 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
         let flags = XyoBuffer()
             .put(bits: minor)
             .getUInt8(offset: 1)
-        
+
         return flags & 2 != 0
     }
     
@@ -43,7 +43,11 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
             return true
         }
         
-        return time.timeIntervalSinceNow < TimeInterval(exactly: -10000)!
+        return time.timeIntervalSinceNow <= TimeInterval(exactly: -10)!
+    }
+
+    public func cancelButtonPressTimer() {
+        self.lastButtonPressTime = nil
     }
     
     public override func detected() {
