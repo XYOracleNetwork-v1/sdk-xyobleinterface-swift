@@ -143,12 +143,14 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                 
                 let numberOfParties = try boundWitness?.getNumberOfParties() ?? 0
                 
-                for i in 0...numberOfParties - 1 {
-                    let fetter = try boundWitness?.getFetterOfParty(partyIndex: i)
-                    let witness = try boundWitness?.getWitnessOfParty(partyIndex: i)
-                    
-                    upcoming.items.append(ByteListViewController.ByteItem(title: "Fetter " + String(i), desc: fetter?.getBuffer().toByteArray().toHexString() ?? "Error"))
-                    upcoming.items.append(ByteListViewController.ByteItem(title: "Witness " + String(i), desc: witness?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                if (numberOfParties > 0) {
+                    for i in 0...numberOfParties - 1 {
+                        let fetter = try boundWitness?.getFetterOfParty(partyIndex: i)
+                        let witness = try boundWitness?.getWitnessOfParty(partyIndex: i)
+                        
+                        upcoming.items.append(ByteListViewController.ByteItem(title: "Fetter " + String(i), desc: fetter?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                        upcoming.items.append(ByteListViewController.ByteItem(title: "Witness " + String(i), desc: witness?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                    }
                 }
                 
                 deselectRow()

@@ -57,6 +57,7 @@ public struct XyoBluetoothServer {
                 
                 let name = XyoGattNameEncoder.encode(major: self.major, minor: self.minor)
                 
+                //XyoService.pipe.serviceUuid
                 self.server.startAdvertiseing(advertisementUUIDs: [XyoService.pipe.serviceUuid], deviceName: name, beacon: beacon)
                 self.server.addService(service: self.service)
             }

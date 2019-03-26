@@ -59,6 +59,7 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
     
     public func reset (password: [UInt8]) -> Bool {
         let ecoded = XyoBuffer()
+            .put(bits: UInt8(password.count + 2))
             .put(bits: UInt8(password.count + 1))
             .put(bytes: password)
             .toByteArray()

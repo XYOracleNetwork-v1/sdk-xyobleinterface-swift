@@ -51,11 +51,13 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
         guard let manager = pipes[request.central.identifier.uuidString] else {
             // If you are here, there is no pipe created for the device, and the following code will create
             // a pipe for the device.
+            print("new pipe")
             _ = createPipeWithWriteRequest(request, peripheral: peripheral)
             return
         }
         
         // this call routes the write request to the peoper pipe
+        print("old pipe")
         manager.handleWriteRequest(request, peripheral: peripheral)
     }
     
