@@ -9,6 +9,7 @@
 import Foundation
 import sdk_objectmodel_swift
 import XyBleSdk
+import CoreBluetooth
 
 public class XyoSentinelXDevice : XyoBluetoothDevice {
     private var lastButtonPressTime : Date? = nil
@@ -55,6 +56,42 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
             self.lastButtonPressTime = Date()
             XyoSentinelXManager.reportEvent(device: self, event: XyoSentinelXManager.Events.buttonpressed)
         }
+    }
+    
+    override public func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
+        let name = peripheral.advertisementData?[CBAdvertisementDataLocalNameKey] as? String
+
+        guard let major = self.iBeacon?.major else {
+            return false
+        }
+        
+        guard let minor = self.iBeacon?.minor else {
+            return false
+        }
+        
+        let encoded = XyoBuffer()
+            .put(bits: minor)
+            .put(bits: major)
+            .toByteArray()
+            .toHexString()
+            .dropFirst(2)
+        
+        let newUuid = "\(encoded)\(XyoBluetoothDevice.uuid.dropFirst(8))".uppercased()
+    
+        guard
+            let services = peripheral.advertisementData?[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID]
+            else { return false }
+        
+        
+        for service in services {
+            if (newUuid == service.uuidString) {
+                self.peripheral = peripheral.peripheral
+                self.peripheral?.delegate = self
+                return true
+            }
+        }
+        
+        return false
     }
     
     public func reset (password: [UInt8]) -> Bool {
