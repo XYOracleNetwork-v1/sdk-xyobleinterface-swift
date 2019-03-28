@@ -93,7 +93,7 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
         
         return false
     }
-    
+
     public func reset (password: [UInt8]) -> Bool {
         let ecoded = XyoBuffer()
             .put(bits: UInt8(password.count + 2))
@@ -102,8 +102,8 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
             .toByteArray()
         
         let toSend = XYBluetoothResult(data: Data(ecoded))
-        
-        return self.set(XyoService.pipe, value: toSend).error == nil
+
+        return self.set(XyoService.factoryReset, value: toSend).error == nil
     }
     
     /// This function changes the access password on the remove device

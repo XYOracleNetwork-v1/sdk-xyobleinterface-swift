@@ -61,7 +61,7 @@ public enum XyoService : XYServiceCharacteristic {
         case .pipe: return "XYO Pipe"
         case .password: return "Change Password"
         case .boundWitnessData: return "Change Bound Witness Data"
-        case .factoryReset: return "Change Bound Witness Data"
+        case .factoryReset: return "Factory Reset"
         case .publicKey: return "Get public key"
         }
     }
