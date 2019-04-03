@@ -96,12 +96,15 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
             .put(bits: UInt32(data.count + 4))
             .put(bytes: data)
             .toByteArray()
+        
+        
+        print("Sending Entire:" + sizeEncoded.toHexString())
         let chunks = XyoOutputStream.chunk(bytes: sizeEncoded, maxChunkSize: centrel.maximumUpdateValueLength - 3)
         
         for chunk in chunks {
             char.value = Data(chunk)
             
-            // introduce a deley so that packets do not arrive out of order TODO find way to wait for
+            // introduce a deley so that packets do not arrive out of order TODO find way to wait for completion
             usleep(timeout)
             
             DispatchQueue.main.async {
@@ -127,6 +130,10 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
         if (newPacket != nil) {
             readPromise.fulfill(newPacket)
         }
+    }
+    
+    func getNetworkHuerestics() -> [XyoObjectStructure] {
+        return []
     }
     
 }

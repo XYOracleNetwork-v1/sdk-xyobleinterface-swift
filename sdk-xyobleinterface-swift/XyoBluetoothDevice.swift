@@ -17,7 +17,7 @@ import sdk_objectmodel_swift
 /// XyoNetworkPipe interface, meaning that data can be send and recived beetwen them. Please note that
 /// one chould not use an instance of this class as a pipe, but tryCreatePipe() to get an instance of
 /// a pipe.
-public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
+open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
     /// The defining family for a XyoBluetoothDevice, this helps the process of creatig a device, and making
     /// sure that it complies to the XYO pipe spec.
     public static let family = XYDeviceFamily.init(uuid: UUID(uuidString: XyoBluetoothDevice.uuid)!,
@@ -71,7 +71,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
         if (result.error == nil) {
             return self
         }
-        
+
         return nil
     }
     
@@ -79,7 +79,7 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
     /// device has a XYO UUID in the advertisement
     /// - Parameter peripheral: The XYO pipe enabled peripheral to try and attatch
     /// - Returns: If the attatchment of the peripheral was sucessfull.
-    override public func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
+    override open func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
         guard
             self.peripheral == nil
             else { return false }
@@ -203,6 +203,8 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
             }
         }
         
+        inputStream.removePacket()
+        
         return latestPacket
     }
     
@@ -211,13 +213,19 @@ public class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyD
         disconnect()
     }
     
+    public func getNetworkHuerestics() -> [XyoObjectStructure] {
+        let unsignedRssi = UInt8((self.rssi * 1) + 126)
+        let rssiTag = XyoObjectStructure.newInstance(schema: XyoSchemas.RSSI, bytes: XyoBuffer().put(bits: (unsignedRssi)))
+        
+        return [rssiTag]
+    }
+    
     /// This function is called whenever a charisteristic is updated, and is how the XYO pipe recives data.
     /// This function will also add to the input stream, and resume a read promise if there is one existing.
     /// - Parameter serviceCharacteristic: The characteristic that is being updated, this should be the XYO serivce
     /// - Parameter value: The value that characteristic has been changed to (or notifyed of)
     public func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
         if (!value.hasError && value.asByteArray != nil) {
-            
             inputStream.addChunk(packet: value.asByteArray!)
             
             guard let donePacket = inputStream.getOldestPacket() else {

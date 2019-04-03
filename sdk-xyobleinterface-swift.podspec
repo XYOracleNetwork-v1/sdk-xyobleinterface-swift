@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'sdk-xyobleinterface-swift'
-  s.version          = '0.1.2-beta.1'
+  s.version          = '0.1.4-beta.1'
   s.summary          = 'A short description of sdk-xyobleinterface-swift'
 
 # This description is used to generate tags and improve search results.
@@ -41,7 +41,7 @@ TODO: Add long description of the pod here.
   s.dependency 'PromisesSwift', '~> 1.2.4'
 
   s.dependency 'sdk-objectmodel-swift',  '~> 0.1.2-beta.3'
-  s.dependency 'sdk-core-swift', '~> 0.1.4-beta.6'
+  s.dependency 'sdk-core-swift', '~> 0.1.5-beta.2'
   s.dependency 'XyBleSdk'
 
   s.subspec 'XyBleSdk' do |ss|

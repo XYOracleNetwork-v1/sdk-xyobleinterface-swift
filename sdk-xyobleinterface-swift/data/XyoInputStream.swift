@@ -39,13 +39,16 @@ public class XyoInputStream {
     public func getOldestPacket () -> [UInt8]? {
         if (donePackets.count > 0) {
             let returnValue = donePackets.first
-            donePackets.removeFirst()
             nextWaitingSize = nil
             currentBuffer = nil
             return returnValue
         }
         
         return nil
+    }
+    
+    public func removePacket () {
+        donePackets.removeFirst()
     }
     
     /// Sets the next waiting size in a safe maner.

@@ -52,7 +52,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         let repositoryConfiguration = XyoRepositoryConfiguration(originState: originStateRepo, originBlock: self.blockRepo)
         
         self.originChainCreator = XyoRelayNode(hasher: hasher, repositoryConfiguration: repositoryConfiguration, queueRepository: bridgeRepo)
-        originChainCreator.originState.addSigner(signer: XyoStubSigner())
+        originChainCreator.originState.addSigner(signer: XyoSecp256k1Signer())
         
         super.init(coder: aDecoder)
     }
@@ -67,12 +67,21 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         
         XyoBluetoothDevice.family.enable(enable: true)
         XyoBluetoothDeviceCreator.enable(enable: true)
+        XyoSentinelXDeviceCreator().enable(enable: true)
         
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
         
-        originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
+        // originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
         server.start(listener: (self as XyoPipeCharacteristicLisitner))
+        
+        XyoSentinelXManager.addListener(key: "main") { (device, event) in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Button pressed", message: "pressed!", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
     }
     
@@ -81,7 +90,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         let handler = XyoNetworkHandler(pipe: pipe)
         
         DispatchQueue.global().async {
-            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
+            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0x01, withOther: 0x01), completion: { (boundWitness, error) in
                 
                 self.boundWitness = boundWitness
                 pipe.close()
@@ -122,6 +131,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         return "XYO Devices"
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         do {
             if (segue.identifier == "showView") {
@@ -133,12 +143,14 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                 
                 let numberOfParties = try boundWitness?.getNumberOfParties() ?? 0
                 
-                for i in 0...numberOfParties - 1 {
-                    let fetter = try boundWitness?.getFetterOfParty(partyIndex: i)
-                    let witness = try boundWitness?.getWitnessOfParty(partyIndex: i)
-                    
-                    upcoming.items.append(ByteListViewController.ByteItem(title: "Fetter " + String(i), desc: fetter?.getBuffer().toByteArray().toHexString() ?? "Error"))
-                    upcoming.items.append(ByteListViewController.ByteItem(title: "Witness " + String(i), desc: witness?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                if (numberOfParties > 0) {
+                    for i in 0...numberOfParties - 1 {
+                        let fetter = try boundWitness?.getFetterOfParty(partyIndex: i)
+                        let witness = try boundWitness?.getWitnessOfParty(partyIndex: i)
+                        
+                        upcoming.items.append(ByteListViewController.ByteItem(title: "Fetter " + String(i), desc: fetter?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                        upcoming.items.append(ByteListViewController.ByteItem(title: "Witness " + String(i), desc: witness?.getBuffer().toByteArray().toHexString() ?? "Error"))
+                    }
                 }
                 
                 deselectRow()

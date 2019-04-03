@@ -17,12 +17,16 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
     
     /// The CBMutableCharacteristic that complies with the XYO pipe protocal.
     internal var cbCharacteristic: CBMutableCharacteristic = CBMutableCharacteristic(type: XyoService.pipe.characteristicUuid,
-                                                                                    properties: CBCharacteristicProperties(rawValue: CBCharacteristicProperties.read.rawValue |
+                                                                                    properties: CBCharacteristicProperties(rawValue:
+                                                                                        CBCharacteristicProperties.writeWithoutResponse.rawValue |
+                                                                                        CBCharacteristicProperties.read.rawValue |
                                                                                         CBCharacteristicProperties.notify.rawValue |
                                                                                         CBCharacteristicProperties.indicate.rawValue |
                                                                                         CBCharacteristicProperties.write.rawValue),
                                                                                     value: nil,
-                                                                                    permissions: CBAttributePermissions(rawValue: CBAttributePermissions.readable.rawValue | CBAttributePermissions.writeable.rawValue))
+                                                                                    permissions: CBAttributePermissions(rawValue:
+                                                                                        CBAttributePermissions.readable.rawValue |
+                                                                                        CBAttributePermissions.writeable.rawValue))
     
     /// A mapping of CBCentral ID UUID strings to their respected pipe.
     private var pipes = [String : XyoGattServerNetworkPipe] ()
@@ -51,11 +55,13 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
         guard let manager = pipes[request.central.identifier.uuidString] else {
             // If you are here, there is no pipe created for the device, and the following code will create
             // a pipe for the device.
+            print("new pipe")
             _ = createPipeWithWriteRequest(request, peripheral: peripheral)
             return
         }
         
         // this call routes the write request to the peoper pipe
+        print("old pipe")
         manager.handleWriteRequest(request, peripheral: peripheral)
     }
     
@@ -71,7 +77,10 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
             let buffer = XyoBuffer(data: value)
             let sizeOfCat = buffer.getUInt8(offset: 4)
             
-            if (sizeOfCat != value.count - 5) { return false }
+            print(value.toHexString())
+            if (sizeOfCat != value.count - 5) {
+                return false
+            }
             
             let catData = buffer.copyRangeOf(from: 4, to: buffer.getSize())
             let advPacket = XyoAdvertisePacket(data: catData.toByteArray())

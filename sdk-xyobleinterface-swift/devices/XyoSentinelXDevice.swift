@@ -8,8 +8,11 @@
 
 import Foundation
 import sdk_objectmodel_swift
+import XyBleSdk
+import CoreBluetooth
 
 public class XyoSentinelXDevice : XyoBluetoothDevice {
+    private var lastButtonPressTime : Date? = nil
     
     
     public func isClaimed () -> Bool {
@@ -21,9 +24,86 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
             .put(bits: minor)
             .getUInt8(offset: 1)
         
+        return flags & 1 != 0
+    }
+    
+    public func isButtonPressed () -> Bool {
+        guard let minor = self.iBeacon?.minor else {
+            return true
+        }
         
-        return flags != 0
+        let flags = XyoBuffer()
+            .put(bits: minor)
+            .getUInt8(offset: 1)
+
+        return flags & 2 != 0
+    }
+    
+    private func isButtonPressTimeoutDone () -> Bool {
+        guard let time = lastButtonPressTime else {
+            return true
+        }
         
+        return time.timeIntervalSinceNow <= TimeInterval(exactly: -10)!
+    }
+
+    public func cancelButtonPressTimer() {
+        self.lastButtonPressTime = nil
+    }
+    
+    public override func detected() {
+        if (isButtonPressed() && isButtonPressTimeoutDone()) {
+            self.lastButtonPressTime = Date()
+            XyoSentinelXManager.reportEvent(device: self, event: XyoSentinelXManager.Events.buttonpressed)
+        }
+    }
+    
+    override public func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
+        let name = peripheral.advertisementData?[CBAdvertisementDataLocalNameKey] as? String
+
+        guard let major = self.iBeacon?.major else {
+            return false
+        }
+        
+        guard let minor = self.iBeacon?.minor else {
+            return false
+        }
+        
+        let encoded = XyoBuffer()
+            .put(bits: minor)
+            .put(bits: major)
+            .toByteArray()
+            .toHexString()
+            .dropFirst(2)
+        
+        let newUuid = "\(encoded)\(XyoBluetoothDevice.uuid.dropFirst(8))".uppercased()
+    
+        guard
+            let services = peripheral.advertisementData?[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID]
+            else { return false }
+        
+        
+        for service in services {
+            if (newUuid == service.uuidString) {
+                self.peripheral = peripheral.peripheral
+                self.peripheral?.delegate = self
+                return true
+            }
+        }
+        
+        return false
+    }
+
+    public func reset (password: [UInt8]) -> Bool {
+        let ecoded = XyoBuffer()
+            .put(bits: UInt8(password.count + 2))
+            .put(bits: UInt8(password.count + 1))
+            .put(bytes: password)
+            .toByteArray()
+        
+        let toSend = XYBluetoothResult(data: Data(ecoded))
+
+        return self.set(XyoService.factoryReset, value: toSend).error == nil
     }
     
     /// This function changes the access password on the remove device
@@ -56,5 +136,13 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
             .toByteArray()
         
         return chunkSend(bytes: encoded, characteristic: XyoService.boundWitnessData, sizeOfChunkSize: XyoObjectSize.FOUR)
+    }
+    
+    public func getBoundWitnessData () -> [UInt8]? {
+        return self.get(XyoService.boundWitnessData).asByteArray
+    }
+    
+    public func getPublicKey () -> [UInt8]? {
+        return self.get(XyoService.publicKey).asByteArray
     }
 }

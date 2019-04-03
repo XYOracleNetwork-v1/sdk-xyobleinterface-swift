@@ -10,6 +10,8 @@ import Foundation
 import XyBleSdk
 
 public struct XyoSentinelXDeviceCreator : XyoManufactorDeviceCreator {
+    public init () {}
+    
     public func createFromIBeacon(iBeacon: XYIBeaconDefinition, rssi: Int) -> XYBluetoothDevice? {
         return XyoSentinelXDevice(iBeacon: iBeacon, rssi: rssi)
     }

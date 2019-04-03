@@ -20,6 +20,12 @@ public enum XyoService : XYServiceCharacteristic {
     
     /// This is the characteristic to change bound witness data of a device
     case boundWitnessData
+
+    /// For reseting the device
+    case factoryReset
+    
+    /// For getting the public key
+    case publicKey
     
     /// The display name of the service.
     public var serviceDisplayName: String {
@@ -27,6 +33,9 @@ public enum XyoService : XYServiceCharacteristic {
     }
     
     /// The CBUUID of the service.
+    // d684352e-df36-484e-bc98-2d5398c5593e - Production UUID
+    // e3955c8935d2-89cb-e484-63fd-e253486d - Reversed UUID
+    // ffffffff-df36-484e-bc98-2d5398c5593e - Testnet UUID
     public var serviceUuid: CBUUID {
         return CBUUID(string: "d684352e-df36-484e-bc98-2d5398c5593e")
         
@@ -35,9 +44,11 @@ public enum XyoService : XYServiceCharacteristic {
     /// The uuid of any characteristic.
     public var characteristicUuid: CBUUID {
         switch self {
-        case .pipe: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa456490b2d")
-        case.password: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa456500b2d")
-        case.boundWitnessData: return CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa456510b2d")
+        case .pipe: return                  CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa456490b2d")
+        case .password: return              CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564A0b2d")
+        case .boundWitnessData: return      CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564B0b2d")
+        case .factoryReset: return          CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564C0b2d")
+        case .publicKey: return             CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564D0b2d")
         }
     }
     
@@ -49,7 +60,9 @@ public enum XyoService : XYServiceCharacteristic {
         switch self {
         case .pipe: return "XYO Pipe"
         case .password: return "Change Password"
-        case.boundWitnessData: return "Change Bound Witness Data"
+        case .boundWitnessData: return "Change Bound Witness Data"
+        case .factoryReset: return "Factory Reset"
+        case .publicKey: return "Get public key"
         }
     }
     
