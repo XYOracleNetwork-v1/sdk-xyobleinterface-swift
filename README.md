@@ -1,6 +1,6 @@
-[logo]: https://www.xy.company/img/home/logo_xy.png
+[logo]: https://cdn.xy.company/img/brand/XY_Logo_GitHub.png
 
-![logo]
+[![logo]](https://xy.company)
 
 # sdk-xyobleinterface-swift
 [![](https://img.shields.io/gitter/room/XYOracleNetwork/Stardust.svg)](https://gitter.im/XYOracleNetwork/Dev) [![Maintainability](https://api.codeclimate.com/v1/badges/177ffd933f809522baaf/maintainability)](https://codeclimate.com/github/XYOracleNetwork/sdk-xyobleinterface-swift/maintainability)
