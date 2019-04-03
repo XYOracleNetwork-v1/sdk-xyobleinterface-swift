@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DB0D14582706B8F56C348D4 /* Pods_sdk_xyobleinterface_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D7E6D6649741F3BDB84D9D /* Pods_sdk_xyobleinterface_swiftTests.framework */; };
 		8C20BF19223F675F0026E10A /* XyoSentinelXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20BF18223F675F0026E10A /* XyoSentinelXManager.swift */; };
 		8C3E6D6B2228A5F100A34A22 /* XyoGattNameEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3E6D6A2228A5F100A34A22 /* XyoGattNameEncoder.swift */; };
 		8C4EB777221CC91E00C238C4 /* XyoPipeCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */; };
@@ -23,6 +24,8 @@
 		8C924DCA2210CA10007FF765 /* XyoInputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DC92210CA10007FF765 /* XyoInputStream.swift */; };
 		8C924DCC2210CA1A007FF765 /* XyoOutputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DCB2210CA1A007FF765 /* XyoOutputStream.swift */; };
 		8C924DCF2210CA66007FF765 /* XyoInputStreamTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DCE2210CA66007FF765 /* XyoInputStreamTest.swift */; };
+		8CF668932254795500BB1D41 /* XyoAdvertisementEncoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF668922254795500BB1D41 /* XyoAdvertisementEncoderTest.swift */; };
+		8CF6689422547D0700BB1D41 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C924DB82210C956007FF765 /* Info.plist */; };
 		C50D8CE602246146FD8DF672 /* Pods_sdk_xyobleinterface_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +41,10 @@
 
 /* Begin PBXFileReference section */
 		01D337A2653A270FE9879488 /* Pods_mod_ble_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mod_ble_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C8DB0873670BF19CC53E30F /* Pods-sdk-xyobleinterface-swiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk-xyobleinterface-swiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdk-xyobleinterface-swiftTests/Pods-sdk-xyobleinterface-swiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdk_xyobleinterface_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5739780399EEC56BF001438F /* Pods-sdk-xyobleinterface-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk-xyobleinterface-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdk-xyobleinterface-swift/Pods-sdk-xyobleinterface-swift.release.xcconfig"; sourceTree = "<group>"; };
+		67D7E6D6649741F3BDB84D9D /* Pods_sdk_xyobleinterface_swiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdk_xyobleinterface_swiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C20BF18223F675F0026E10A /* XyoSentinelXManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoSentinelXManager.swift; sourceTree = "<group>"; };
 		8C3E6D6A2228A5F100A34A22 /* XyoGattNameEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoGattNameEncoder.swift; sourceTree = "<group>"; };
 		8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoPipeCharacteristic.swift; sourceTree = "<group>"; };
@@ -59,6 +64,8 @@
 		8C924DC92210CA10007FF765 /* XyoInputStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoInputStream.swift; sourceTree = "<group>"; };
 		8C924DCB2210CA1A007FF765 /* XyoOutputStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoOutputStream.swift; sourceTree = "<group>"; };
 		8C924DCE2210CA66007FF765 /* XyoInputStreamTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoInputStreamTest.swift; sourceTree = "<group>"; };
+		8CF668922254795500BB1D41 /* XyoAdvertisementEncoderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoAdvertisementEncoderTest.swift; sourceTree = "<group>"; };
+		AA1B1A68033D818BA1A3D4A3 /* Pods-sdk-xyobleinterface-swiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk-xyobleinterface-swiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdk-xyobleinterface-swiftTests/Pods-sdk-xyobleinterface-swiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C7DA8516498310AEB6B81DC5 /* Pods-sdk-xyobleinterface-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk-xyobleinterface-swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdk-xyobleinterface-swift/Pods-sdk-xyobleinterface-swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DBDFC9F86E945DD581B819A8 /* Pods-mod-ble-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mod-ble-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-mod-ble-swift/Pods-mod-ble-swift.release.xcconfig"; sourceTree = "<group>"; };
 		EAB89E24A06184E50BE82FA4 /* Pods-mod-ble-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mod-ble-swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mod-ble-swift/Pods-mod-ble-swift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C924DB22210C956007FF765 /* sdk_xyobleinterface_swift.framework in Frameworks */,
+				3DB0D14582706B8F56C348D4 /* Pods_sdk_xyobleinterface_swiftTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +99,8 @@
 				DBDFC9F86E945DD581B819A8 /* Pods-mod-ble-swift.release.xcconfig */,
 				C7DA8516498310AEB6B81DC5 /* Pods-sdk-xyobleinterface-swift.debug.xcconfig */,
 				5739780399EEC56BF001438F /* Pods-sdk-xyobleinterface-swift.release.xcconfig */,
+				AA1B1A68033D818BA1A3D4A3 /* Pods-sdk-xyobleinterface-swiftTests.debug.xcconfig */,
+				0C8DB0873670BF19CC53E30F /* Pods-sdk-xyobleinterface-swiftTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -148,6 +158,7 @@
 			children = (
 				8C924DCD2210CA4C007FF765 /* data */,
 				8C924DB82210C956007FF765 /* Info.plist */,
+				8CF668922254795500BB1D41 /* XyoAdvertisementEncoderTest.swift */,
 			);
 			path = "sdk-xyobleinterface-swiftTests";
 			sourceTree = "<group>";
@@ -175,6 +186,7 @@
 			children = (
 				01D337A2653A270FE9879488 /* Pods_mod_ble_swift.framework */,
 				377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */,
+				67D7E6D6649741F3BDB84D9D /* Pods_sdk_xyobleinterface_swiftTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -216,9 +228,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C924DBF2210C956007FF765 /* Build configuration list for PBXNativeTarget "sdk-xyobleinterface-swiftTests" */;
 			buildPhases = (
+				BD38012BD274912925A761D3 /* [CP] Check Pods Manifest.lock */,
 				8C924DAD2210C956007FF765 /* Sources */,
 				8C924DAE2210C956007FF765 /* Frameworks */,
 				8C924DAF2210C956007FF765 /* Resources */,
+				FD60610BBE08D105ADE46622 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -280,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF6689422547D0700BB1D41 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +321,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD38012BD274912925A761D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-sdk-xyobleinterface-swiftTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD60610BBE08D105ADE46622 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sdk-xyobleinterface-swiftTests/Pods-sdk-xyobleinterface-swiftTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sdk-xyobleinterface-swiftTests/Pods-sdk-xyobleinterface-swiftTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-sdk-xyobleinterface-swiftTests/Pods-sdk-xyobleinterface-swiftTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -336,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C924DCF2210CA66007FF765 /* XyoInputStreamTest.swift in Sources */,
+				8CF668932254795500BB1D41 /* XyoAdvertisementEncoderTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,12 +584,14 @@
 		};
 		8C924DC02210C956007FF765 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA1B1A68033D818BA1A3D4A3 /* Pods-sdk-xyobleinterface-swiftTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WA9VC4AR6Q;
-				INFOPLIST_FILE = "mod-ble-swiftTests/Info.plist";
+				INFOPLIST_FILE = "sdk-xyobleinterface-swiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,6 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "network.xyo.mod-ble-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -550,12 +608,14 @@
 		};
 		8C924DC12210C956007FF765 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C8DB0873670BF19CC53E30F /* Pods-sdk-xyobleinterface-swiftTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WA9VC4AR6Q;
-				INFOPLIST_FILE = "mod-ble-swiftTests/Info.plist";
+				INFOPLIST_FILE = "sdk-xyobleinterface-swiftTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -563,6 +623,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "network.xyo.mod-ble-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

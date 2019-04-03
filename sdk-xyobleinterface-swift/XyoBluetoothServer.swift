@@ -15,12 +15,10 @@ import sdk_objectmodel_swift
 
 /// A class to manage the creating of XYO pipes at a high level on the bluetooth peripheral side.
 public struct XyoBluetoothServer {
+    static let IPhoneBrodcastId: UInt8 = 0x02
     
     /// The IBeacon major that will be advertised.
-    public let major : UInt16
-    
-    /// The IBeacon minor that will be advertised.
-    public let minor : UInt16
+    public let randomSeed: UInt32
     
     /// The instance of the ble server that will be used to make bluetooth calls, and advertise.
     private let server = XYCBPeripheralManager.instance
@@ -30,14 +28,12 @@ public struct XyoBluetoothServer {
     
     /// Creates a new instance of this class with a ranom major and a random minor.
     public init () {
-        self.major = UInt16.random(in: 0...UInt16.max)
-        self.minor = UInt16.random(in: 0...UInt16.max)
+        self.randomSeed = UInt32.random(in: 0...UInt32.max)
     }
     
     /// Creates a new instance of this class with a set major and a set minor.
-    public init (major : UInt16, minor: UInt16) {
-        self.major = major
-        self.minor = minor
+    public init (randomSeed: UInt32) {
+        self.randomSeed = randomSeed
     }
     
     /// Starts the bluetooth server, and advertising. Will call back the the provided callback when a pipe has
@@ -50,12 +46,12 @@ public struct XyoBluetoothServer {
             if (result) {
                 
                 let beacon = CLBeaconRegion(proximityUUID: UUID(uuidString: XyoService.pipe.serviceUuid.uuidString)!,
-                                            major: self.major,
-                                            minor: self.minor,
+                                            major: XyoBluetoothServer.getMajor(randomSeed: self.randomSeed, id: XyoBluetoothServer.IPhoneBrodcastId),
+                                            minor: self.getMinor(),
                                             identifier: "xyo")
                 
                 
-                let name = XyoGattNameEncoder.encode(major: self.major, minor: self.minor)
+                let name = XyoGattNameEncoder.encode(major: XyoBluetoothServer.getMajor(randomSeed: self.randomSeed, id: XyoBluetoothServer.IPhoneBrodcastId), minor: self.getMinor())
                 
                 //XyoService.pipe.serviceUuid
                 self.server.startAdvertiseing(advertisementUUIDs: [XyoService.pipe.serviceUuid], deviceName: name, beacon: beacon)
@@ -63,6 +59,20 @@ public struct XyoBluetoothServer {
             }
             
         }
+    }
+    
+    static func getMajor (randomSeed: UInt32, id: UInt8) -> UInt16 {
+        let majorRandomMask: UInt32 =   0b1111_1111_1100_0000_0000_0000_0000_0000
+        let majorWithRandom = (majorRandomMask & randomSeed)
+        let majorWithId = (UInt32(id & 0b0011_1111) << 16)
+        let majorWithRandomAndId = majorWithRandom | majorWithId
+        
+        return UInt16(majorWithRandomAndId >> 16)
+        
+    }
+    
+    private func getMinor () -> UInt16 {
+        return 0
     }
     
     /// Turns off the server and advertising

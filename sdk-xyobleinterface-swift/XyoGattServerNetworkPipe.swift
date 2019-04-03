@@ -104,7 +104,7 @@ class XyoGattServerNetworkPipe : XyoNetworkPipe {
         for chunk in chunks {
             char.value = Data(chunk)
             
-            // introduce a deley so that packets do not arrive out of order TODO find way to wait for
+            // introduce a deley so that packets do not arrive out of order TODO find way to wait for completion
             usleep(timeout)
             
             DispatchQueue.main.async {
