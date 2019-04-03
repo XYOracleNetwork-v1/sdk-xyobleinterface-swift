@@ -5,7 +5,7 @@ use_frameworks!
 target 'SampleiOS' do
  	pod 'sdk-objectmodel-swift', '~> 0.1.2-beta.3'
     pod 'sdk-core-swift', '~> 0.1.5-beta.2'
-    pod 'XyBleSdk', :path => '/Users/carterharrison/Documents/github/xyo/sdk-ble-swift/'
+    pod 'XyBleSdk', '~> 0.0.1'
     pod 'sdk-xyobleinterface-swift', :path => '../'
     
 end
