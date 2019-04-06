@@ -69,6 +69,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         /// we use a unique name as the delegate key to prevent overriding keys
         let result = self.subscribe(to: XyoService.pipe, delegate: (key: "notify [DBG: \(#function)]: \(Unmanaged.passUnretained(self).toOpaque())", delegate: self))
         if (result.error == nil) {
+            print("Created PIPE")
             return self
         }
 

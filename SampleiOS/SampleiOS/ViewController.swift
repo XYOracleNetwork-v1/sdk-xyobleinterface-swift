@@ -11,6 +11,7 @@ import CoreBluetooth
 import XyBleSdk
 import sdk_core_swift
 import sdk_xyobleinterface_swift
+import Promises
 
 
 /// The primary view controller that maintains the list of device and handles bound witnesses.
@@ -123,7 +124,10 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath as IndexPath) as! TableViewCellController
-        cell.title.text = "XYO"
+        let device = self.devices[indexPath.row]
+        let sen = device as? XyoSentinelXDevice
+        
+        cell.title.text = "XYO \(sen != nil) \(device.iBeacon?.minor)"
         return cell
     }
     
@@ -177,23 +181,36 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
             }
             
             device.connection {
+            
+                XYCentral.instance.connect(to: device)
+
                 guard let pipe = device.tryCreatePipe() else {
                     return
                 }
                 
                 let handler = XyoNetworkHandler(pipe: pipe)
                 
+                let await1 = Promise<Any?>.pending()
+                
                 self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
                     
                     
+                    await1.fulfill(nil)
+                    
                     self.boundWitness = boundWitness
                     self.canUpdate = true
-                    XYCentral.instance.disconnect(from: device)
+//                    XYCentral.instance.disconnect(from: device)
                     
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "showView", sender: self)
                     }
                 })
+                
+                try await(await1)
+            
+            
+                }.then {
+                     XYCentral.instance.disconnect(from: device)
             }
         }
         
