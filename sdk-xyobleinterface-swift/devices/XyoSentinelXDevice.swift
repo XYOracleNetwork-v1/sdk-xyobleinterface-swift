@@ -59,8 +59,6 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
     }
     
     override public func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
-        let name = peripheral.advertisementData?[CBAdvertisementDataLocalNameKey] as? String
-
         guard let major = self.iBeacon?.major else {
             return false
         }
@@ -68,23 +66,14 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
         guard let minor = self.iBeacon?.minor else {
             return false
         }
-        
-        let encoded = XyoBuffer()
-            .put(bits: minor)
-            .put(bits: major)
-            .toByteArray()
-            .toHexString()
-            .dropFirst(2)
-        
-        let newUuid = "\(encoded)\(XyoBluetoothDevice.uuid.dropFirst(8))".uppercased()
-    
+
         guard
             let services = peripheral.advertisementData?[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID]
             else { return false }
         
         
         for service in services {
-            if (newUuid == service.uuidString) {
+            if (checkUuidWithMajorMinor(major: major, minor: minor, UUID: service)) {
                 self.peripheral = peripheral.peripheral
                 self.peripheral?.delegate = self
                 return true
@@ -92,6 +81,21 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
         }
         
         return false
+    }
+    
+    private func checkUuidWithMajorMinor (major: UInt16, minor: UInt16, UUID: CBUUID) -> Bool {
+        let encodedMajor = XyoBuffer().put(bits: major).toByteArray()
+        let encodedMinor = XyoBuffer().put(bits: minor).toByteArray()
+        let uuidBytes: [UInt8] = UUID.data.map { $0 }
+        
+        if (uuidBytes.count < 4) {
+            return false
+        }
+        
+        let encodedMinorOfUuid = XyoBuffer(data: [uuidBytes[0], uuidBytes[1]]).toByteArray()
+        let encodedMajorOfUuid = XyoBuffer(data: [uuidBytes[2], uuidBytes[3]]).toByteArray()
+        
+        return (encodedMajor == encodedMajorOfUuid) && (encodedMinor[0] == encodedMinorOfUuid[0])
     }
 
     public func reset (password: [UInt8]) -> Bool {
