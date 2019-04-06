@@ -190,27 +190,25 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                 
                 let handler = XyoNetworkHandler(pipe: pipe)
                 
-                let await1 = Promise<Any?>.pending()
+                let awaiter = Promise<Any?>.pending()
                 
                 self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
                     
                     
-                    await1.fulfill(nil)
+                    awaiter.fulfill(nil)
                     
                     self.boundWitness = boundWitness
                     self.canUpdate = true
-//                    XYCentral.instance.disconnect(from: device)
                     
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "showView", sender: self)
                     }
                 })
                 
-                try await(await1)
+                try await(awaiter)
             
-            
-                }.then {
-                     XYCentral.instance.disconnect(from: device)
+            }.then {
+                XYCentral.instance.disconnect(from: device)
             }
         }
         
