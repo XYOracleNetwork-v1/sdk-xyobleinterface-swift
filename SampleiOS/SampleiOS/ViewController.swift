@@ -69,6 +69,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         XyoBluetoothDevice.family.enable(enable: true)
         XyoBluetoothDeviceCreator.enable(enable: true)
         XyoSentinelXDeviceCreator().enable(enable: true)
+        XyoBridgeXDeviceCreator().enable(enable: true)
         
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
@@ -125,9 +126,15 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath as IndexPath) as! TableViewCellController
         let device = self.devices[indexPath.row]
-        let sen = device as? XyoSentinelXDevice
         
-        cell.title.text = "XYO \(sen != nil) \(device.iBeacon?.minor)"
+        if (device as? XyoSentinelXDevice != nil) {
+            cell.title.text = "XYO SentinelX"
+        } else if (device as? XyoBridgeXDevice != nil) {
+            cell.title.text = "XYO BridgeX"
+        } else {
+            cell.title.text = "XYO Device"
+        }
+        
         return cell
     }
     
@@ -199,16 +206,17 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                     
                     self.boundWitness = boundWitness
                     self.canUpdate = true
+                    XYCentral.instance.disconnect(from: device)
                     
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "showView", sender: self)
                     }
                 })
                 
-                try await(awaiter)
+                _ = try await(awaiter)
             
             }.then {
-                XYCentral.instance.disconnect(from: device)
+               XYCentral.instance.disconnect(from: device)
             }
         }
         

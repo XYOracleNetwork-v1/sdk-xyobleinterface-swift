@@ -72,7 +72,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
             print("Created PIPE")
             return self
         }
-
+        
         return nil
     }
     
@@ -119,8 +119,8 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
             let major = self.iBeacon?.major,
             let minor = self.iBeacon?.minor,
             let deviceName = peripheral.advertisementData?[CBAdvertisementDataLocalNameKey] as? String
-        else {
-            return false
+            else {
+                return false
         }
         
         let majorMinorName = XyoGattNameEncoder.encode(major: major, minor: minor)
@@ -142,6 +142,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
     /// - Returns: Will return the response from the other party, will return nil if there was an error or if
     /// waitForResponse was set to false.
     public func send(data: [UInt8], waitForResponse: Bool, completion: @escaping ([UInt8]?) -> ()) {
+        print("SENDING: \(data.toHexString())")
         if (!chunkSend(bytes: data, characteristic: XyoService.pipe, sizeOfChunkSize: XyoObjectSize.FOUR)) {
             completion(nil)
             return
@@ -165,10 +166,10 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         let sizeEncodedBytes = XyoBuffer()
         
         switch sizeOfChunkSize {
-            case .ONE: sizeEncodedBytes.put(bits: UInt8(bytes.count + 1))
-            case .TWO: sizeEncodedBytes.put(bits: UInt16(bytes.count + 2))
-            case.FOUR: sizeEncodedBytes.put(bits: UInt32(bytes.count + 4))
-            case.EIGHT: sizeEncodedBytes.put(bits: UInt64(bytes.count + 8))
+        case .ONE: sizeEncodedBytes.put(bits: UInt8(bytes.count + 1))
+        case .TWO: sizeEncodedBytes.put(bits: UInt16(bytes.count + 2))
+        case.FOUR: sizeEncodedBytes.put(bits: UInt32(bytes.count + 4))
+        case.EIGHT: sizeEncodedBytes.put(bits: UInt64(bytes.count + 8))
         }
         
         sizeEncodedBytes.put(bytes: bytes)
@@ -177,7 +178,10 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes.toByteArray(), maxChunkSize: mtu - 3)
         
         for chunk in chunks {
+            print("SENDING CHUNK \(chunk.toHexString())")
             let status = self.set(characteristic, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
+            
+            print("DONE SENDING CHUNK")
             
             // break the loop if there was an error
             if (status.error != nil) {
@@ -193,12 +197,14 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
     /// - Warning: This function is blocking while it waits for bluetooth calls.
     /// - Returns: This function returns what the divice on the other end of the pipe just sent.
     private func waitForRead () -> [UInt8]? {
+        print("WAITING FOR READ")
         var latestPacket : [UInt8]? = inputStream.getOldestPacket()
         if (latestPacket == nil) {
             recivePromise = Promise<[UInt8]?>.pending().timeout(20)
             do {
                 latestPacket = try await(recivePromise.unsafelyUnwrapped)
             } catch {
+                print("TIMEOUT")
                 // timeout has occored
                 return nil
             }
@@ -206,6 +212,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         
         inputStream.removePacket()
         
+        print("READ ENTIRE \(latestPacket?.toHexString())")
         return latestPacket
     }
     
@@ -227,6 +234,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
     /// - Parameter value: The value that characteristic has been changed to (or notifyed of)
     public func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
         if (!value.hasError && value.asByteArray != nil) {
+            print("GOT NOTIFACTION \(value.asByteArray!.toHexString())")
             inputStream.addChunk(packet: value.asByteArray!)
             
             guard let donePacket = inputStream.getOldestPacket() else {
@@ -237,3 +245,4 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         }
     }
 }
+
