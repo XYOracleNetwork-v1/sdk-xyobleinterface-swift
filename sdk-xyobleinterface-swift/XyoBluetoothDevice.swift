@@ -179,7 +179,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         
         for chunk in chunks {
             print("SENDING CHUNK \(chunk.toHexString())")
-            let status = self.set(characteristic, value: XYBluetoothResult(data: Data(chunk)), withResponse: false)
+            let status = self.set(characteristic, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
             
             print("DONE SENDING CHUNK")
             
