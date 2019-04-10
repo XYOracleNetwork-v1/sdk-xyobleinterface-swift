@@ -179,7 +179,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         
         for chunk in chunks {
             print("SENDING CHUNK \(chunk.toHexString())")
-            let status = self.set(characteristic, value: XYBluetoothResult(data: Data(chunk)), withResponse: true)
+            let status = self.set(characteristic, value: XYBluetoothResult(data: Data(chunk)), withResponse: false)
             
             print("DONE SENDING CHUNK")
             
@@ -222,10 +222,21 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
     }
     
     public func getNetworkHuerestics() -> [XyoObjectStructure] {
-        let unsignedRssi = UInt8((self.rssi * 1) + 126)
+        var toReturn = [XyoObjectStructure]()
+
+        let pwr = self.iBeacon?.powerLevel
+
+        if pwr != nil {
+            let pwrTag = XyoObjectStructure.newInstance(schema: XyoSchemas.BLE_POWER_LEVEL, bytes: XyoBuffer().put(bits: pwr!))
+            toReturn.append(pwrTag)
+        }
+
+        let unsignedRssi = UInt8(bitPattern: Int8(self.rssi))
         let rssiTag = XyoObjectStructure.newInstance(schema: XyoSchemas.RSSI, bytes: XyoBuffer().put(bits: (unsignedRssi)))
+
+        toReturn.append(rssiTag)
         
-        return [rssiTag]
+        return toReturn
     }
     
     /// This function is called whenever a charisteristic is updated, and is how the XYO pipe recives data.

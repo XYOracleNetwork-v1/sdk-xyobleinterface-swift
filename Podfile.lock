@@ -2,7 +2,7 @@ PODS:
   - PromisesObjC (1.2.7)
   - PromisesSwift (1.2.7):
     - PromisesObjC (= 1.2.7)
-  - sdk-core-swift (0.1.5-beta.2):
+  - sdk-core-swift (0.1.6-beta.5):
     - sdk-objectmodel-swift (~> 0.1.2-beta.3)
     - secp256k1.swift
   - sdk-objectmodel-swift (0.1.2-beta.3)
@@ -11,7 +11,7 @@ PODS:
     - PromisesSwift (~> 1.2.4)
 
 DEPENDENCIES:
-  - sdk-core-swift (~> 0.1.4-beta.6)
+  - sdk-core-swift (~> 0.1.6-beta.5)
   - sdk-objectmodel-swift (~> 0.1.2-beta.3)
   - XyBleSdk (~> 0.0.1)
 
@@ -27,11 +27,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   PromisesObjC: 7b28ddd1e78cce8f80f1ada927d2217663a9c672
   PromisesSwift: b27f410f9ea693753cfd4cfd8ac1c60a471f137b
-  sdk-core-swift: 8d254021959a3edaff4441ff389c05dfee55c7b8
+  sdk-core-swift: 0dd4edad04cfb076aa3c66d2f5bc0cb69168ba37
   sdk-objectmodel-swift: 93b02d39d406c39e45ad15a2d5b488c9f8e16b58
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
   XyBleSdk: 412c59d8b05e92a4c2341bcf11909861a12ddbba
 
-PODFILE CHECKSUM: f6bf85fc4ccb3188934cdd22191d0f26e7e3d211
+PODFILE CHECKSUM: 85a73f662191cb8cb28ea6702c00a41ccbafe669
 
 COCOAPODS: 1.7.0.beta.2
