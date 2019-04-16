@@ -57,6 +57,10 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
     public convenience init(iBeacon: XYIBeaconDefinition, rssi: Int = XYDeviceProximity.none.rawValue) {
         self.init(iBeacon.xyId(from: XyoBluetoothDevice.family), iBeacon: iBeacon, rssi: rssi)
     }
+
+    open func getMtu () -> Int {
+        return peripheral?.maximumWriteValueLength(for: CBCharacteristicWriteType.withResponse) ?? 22
+    }
     
     /// A function to try and create a pipe. This should be the function used to create a pipe, not using this instance
     /// as a pipe, even though it may work, it will not work consistsnatly.
@@ -173,9 +177,8 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         }
         
         sizeEncodedBytes.put(bytes: bytes)
-        
-        let mtu = peripheral?.maximumWriteValueLength(for: CBCharacteristicWriteType.withResponse) ?? 22
-        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes.toByteArray(), maxChunkSize: mtu - 3)
+
+        let chunks = XyoOutputStream.chunk(bytes: sizeEncodedBytes.toByteArray(), maxChunkSize: getMtu() - 3)
         
         for chunk in chunks {
             print("SENDING CHUNK \(chunk.toHexString())")
@@ -235,7 +238,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         let rssiTag = XyoObjectStructure.newInstance(schema: XyoSchemas.RSSI, bytes: XyoBuffer().put(bits: (unsignedRssi)))
 
         toReturn.append(rssiTag)
-        
+
         return toReturn
     }
     

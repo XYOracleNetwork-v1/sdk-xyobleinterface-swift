@@ -14,6 +14,8 @@ public enum XyoBridgeXService : XYServiceCharacteristic {
     case connect
     case status
     case scan
+    case ip
+    case ssid
 
     /// The display name of the service.
     public var serviceDisplayName: String {
@@ -26,6 +28,8 @@ public enum XyoBridgeXService : XYServiceCharacteristic {
         case .connect: return   CBUUID(string: "00010000-89BD-43C8-9231-40F6E305F96D")
         case .status: return    CBUUID(string: "00010000-89BD-43C8-9231-40F6E305F96D")
         case .scan: return      CBUUID(string: "00010000-89BD-43C8-9231-40F6E305F96D")
+        case .ip: return        CBUUID(string: "00010000-89BD-43C8-9231-40F6E305F96D")
+        case .ssid: return       CBUUID(string: "00010000-89BD-43C8-9231-40F6E305F96D")
         }
     }
 
@@ -37,6 +41,8 @@ public enum XyoBridgeXService : XYServiceCharacteristic {
         case .connect: return                CBUUID(string: "00010001-89BD-43C8-9231-40F6E305F96D")
         case .status: return                 CBUUID(string: "00010030-89BD-43C8-9231-40F6E305F96D")
         case .scan: return                   CBUUID(string: "00010040-89BD-43C8-9231-40F6E305F96D")
+        case .ip: return                     CBUUID(string: "00010020-89BD-43C8-9231-40F6E305F96D")
+        case .ssid: return                   CBUUID(string: "00010010-89BD-43C8-9231-40F6E305F96D")
         }
     }
 
@@ -48,6 +54,8 @@ public enum XyoBridgeXService : XYServiceCharacteristic {
         case .connect: return "Connect"
         case .status: return "Status"
         case .scan: return "Scan"
+        case .ssid: return "Ssid"
+        case .ip: return "Ip"
         }
     }
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'sdk-xyobleinterface-swift'
-  s.version          = '0.1.5-beta.1'
+  s.version          = '0.1.5-beta.2'
   s.summary          = 'A short description of sdk-xyobleinterface-swift'
 
 

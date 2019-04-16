@@ -47,6 +47,10 @@ public class XyoSentinelXDevice : XyoDiffereniableDevice {
         return time.timeIntervalSinceNow <= TimeInterval(exactly: -10)!
     }
 
+    override public func getMtu() -> Int {
+        return 22
+    }
+
     public func cancelButtonPressTimer() {
         self.lastButtonPressTime = nil
     }
