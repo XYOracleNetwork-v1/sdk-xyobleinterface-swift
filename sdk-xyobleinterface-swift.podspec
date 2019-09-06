@@ -8,9 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'sdk-xyobleinterface-swift'
-  s.version          = '3.0.0'
+  s.version          = '3.0.1'
   s.summary          = 'A short description of sdk-xyobleinterface-swift'
-  s.swift_version    = 5.0
+  s.swift_version    = '5.0'
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
@@ -25,19 +25,12 @@ TODO: Add long description of the pod here.
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'LGPL3', :file => 'LICENSE' }
   s.author           = { 'Carter Harrison' => 'carterjharrison@gmail.com' }
-  s.source           = { :git => 'https://github.com/XYOracleNetwork/sdk-xyobleinterface-swiftt', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/XYOracleNetwork/sdk-xyobleinterface-swift', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
 
   s.source_files = 'sdk-xyobleinterface-swift/**/*.{swift}'
   
-  # s.resource_bundles = {
-  #   'sdk-objectmodel-swift' => ['sdk-objectmodel-swift/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'PromisesSwift', '~> 1.2.4'
 
   s.dependency 'sdk-objectmodel-swift',  '~> 3.0'
@@ -47,6 +40,5 @@ TODO: Add long description of the pod here.
   s.subspec 'XyBleSdk' do |ss|
       ss.source_files         = '../sdk-ble-swift/Source/**/*.{swift}'
   end
-
 
 end

@@ -26,6 +26,9 @@ public enum XyoService : XYServiceCharacteristic {
     
     /// For getting the public key
     case publicKey
+
+    /// For staying away
+    case stayAwake
     
     /// The display name of the service.
     public var serviceDisplayName: String {
@@ -49,6 +52,7 @@ public enum XyoService : XYServiceCharacteristic {
         case .boundWitnessData: return      CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564B0b2d")
         case .factoryReset: return          CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564C0b2d")
         case .publicKey: return             CBUUID(string: "727a3639-0eb4-4525-b1bc-7fa4564D0b2d")
+        case .stayAwake: return             CBUUID(string: "a44eacf4-0104-0001-0001-5f784c9977b5")
         }
     }
     
@@ -63,6 +67,7 @@ public enum XyoService : XYServiceCharacteristic {
         case .boundWitnessData: return "Change Bound Witness Data"
         case .factoryReset: return "Factory Reset"
         case .publicKey: return "Get public key"
+        case .stayAwake: return "Stay Awake"
         }
     }
     

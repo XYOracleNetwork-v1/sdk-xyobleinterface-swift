@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		3DB0D14582706B8F56C348D4 /* Pods_sdk_xyobleinterface_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D7E6D6649741F3BDB84D9D /* Pods_sdk_xyobleinterface_swiftTests.framework */; };
-		8C20BF19223F675F0026E10A /* XyoSentinelXManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20BF18223F675F0026E10A /* XyoSentinelXManager.swift */; };
 		8C3E6D6B2228A5F100A34A22 /* XyoGattNameEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3E6D6A2228A5F100A34A22 /* XyoGattNameEncoder.swift */; };
+		8C3F9AE4225E51CA005A1AA1 /* devices in Resources */ = {isa = PBXBuildFile; fileRef = 8C3F9AE3225E51CA005A1AA1 /* devices */; };
 		8C4EB777221CC91E00C238C4 /* XyoPipeCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */; };
 		8C4EB779221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB778221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift */; };
 		8C4EB77B221CC94F00C238C4 /* XyoBluetoothServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4EB77A221CC94F00C238C4 /* XyoBluetoothServer.swift */; };
-		8C76A9E2222F688E002DC06B /* XyoSentinelXDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C76A9E1222F688E002DC06B /* XyoSentinelXDevice.swift */; };
-		8C76A9E4222F68F9002DC06B /* XyoSentinelXDeviceCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C76A9E3222F68F9002DC06B /* XyoSentinelXDeviceCreator.swift */; };
 		8C76A9E9222F6B7A002DC06B /* XyoBluetoothDeviceCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C76A9E8222F6B7A002DC06B /* XyoBluetoothDeviceCreator.swift */; };
 		8C76A9EB222F6BC2002DC06B /* XyoManufactorDeviceCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C76A9EA222F6BC2002DC06B /* XyoManufactorDeviceCreator.swift */; };
 		8C924DB22210C956007FF765 /* sdk_xyobleinterface_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C924DA82210C956007FF765 /* sdk_xyobleinterface_swift.framework */; };
@@ -44,13 +42,11 @@
 		377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdk_xyobleinterface_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5739780399EEC56BF001438F /* Pods-sdk-xyobleinterface-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdk-xyobleinterface-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdk-xyobleinterface-swift/Pods-sdk-xyobleinterface-swift.release.xcconfig"; sourceTree = "<group>"; };
 		67D7E6D6649741F3BDB84D9D /* Pods_sdk_xyobleinterface_swiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdk_xyobleinterface_swiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C20BF18223F675F0026E10A /* XyoSentinelXManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoSentinelXManager.swift; sourceTree = "<group>"; };
 		8C3E6D6A2228A5F100A34A22 /* XyoGattNameEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoGattNameEncoder.swift; sourceTree = "<group>"; };
+		8C3F9AE3225E51CA005A1AA1 /* devices */ = {isa = PBXFileReference; lastKnownFileType = folder; path = devices; sourceTree = "<group>"; };
 		8C4EB776221CC91E00C238C4 /* XyoPipeCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoPipeCharacteristic.swift; sourceTree = "<group>"; };
 		8C4EB778221CC93A00C238C4 /* XyoGattServerNetworkPipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoGattServerNetworkPipe.swift; sourceTree = "<group>"; };
 		8C4EB77A221CC94F00C238C4 /* XyoBluetoothServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoBluetoothServer.swift; sourceTree = "<group>"; };
-		8C76A9E1222F688E002DC06B /* XyoSentinelXDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoSentinelXDevice.swift; sourceTree = "<group>"; };
-		8C76A9E3222F68F9002DC06B /* XyoSentinelXDeviceCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoSentinelXDeviceCreator.swift; sourceTree = "<group>"; };
 		8C76A9E8222F6B7A002DC06B /* XyoBluetoothDeviceCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoBluetoothDeviceCreator.swift; sourceTree = "<group>"; };
 		8C76A9EA222F6BC2002DC06B /* XyoManufactorDeviceCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XyoManufactorDeviceCreator.swift; sourceTree = "<group>"; };
 		8C924DA82210C956007FF765 /* sdk_xyobleinterface_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sdk_xyobleinterface_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,16 +100,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8C76A9E0222F686C002DC06B /* devices */ = {
-			isa = PBXGroup;
-			children = (
-				8C76A9E1222F688E002DC06B /* XyoSentinelXDevice.swift */,
-				8C76A9E3222F68F9002DC06B /* XyoSentinelXDeviceCreator.swift */,
-				8C20BF18223F675F0026E10A /* XyoSentinelXManager.swift */,
-			);
-			path = devices;
-			sourceTree = "<group>";
-		};
 		8C924D9E2210C956007FF765 = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +123,7 @@
 		8C924DAA2210C956007FF765 /* sdk-xyobleinterface-swift */ = {
 			isa = PBXGroup;
 			children = (
-				8C76A9E0222F686C002DC06B /* devices */,
+				8C3F9AE3225E51CA005A1AA1 /* devices */,
 				8C924DC82210C9FC007FF765 /* data */,
 				8C924DAB2210C956007FF765 /* sdk_xyobleinterface_swift.h */,
 				8C924DAC2210C956007FF765 /* Info.plist */,
@@ -286,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3F9AE4225E51CA005A1AA1 /* devices in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,11 +358,8 @@
 				8C4EB777221CC91E00C238C4 /* XyoPipeCharacteristic.swift in Sources */,
 				8C76A9EB222F6BC2002DC06B /* XyoManufactorDeviceCreator.swift in Sources */,
 				8C3E6D6B2228A5F100A34A22 /* XyoGattNameEncoder.swift in Sources */,
-				8C76A9E2222F688E002DC06B /* XyoSentinelXDevice.swift in Sources */,
 				8C924DC52210C96F007FF765 /* XyoService.swift in Sources */,
-				8C76A9E4222F68F9002DC06B /* XyoSentinelXDeviceCreator.swift in Sources */,
 				8C924DCC2210CA1A007FF765 /* XyoOutputStream.swift in Sources */,
-				8C20BF19223F675F0026E10A /* XyoSentinelXManager.swift in Sources */,
 				8C924DC32210C966007FF765 /* XyoBluetoothDevice.swift in Sources */,
 				8C76A9E9222F6B7A002DC06B /* XyoBluetoothDeviceCreator.swift in Sources */,
 				8C924DCA2210CA10007FF765 /* XyoInputStream.swift in Sources */,

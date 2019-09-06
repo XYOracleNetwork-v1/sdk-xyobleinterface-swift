@@ -11,6 +11,7 @@ import CoreBluetooth
 import XyBleSdk
 import sdk_core_swift
 import sdk_xyobleinterface_swift
+import Promises
 
 
 /// The primary view controller that maintains the list of device and handles bound witnesses.
@@ -68,6 +69,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         XyoBluetoothDevice.family.enable(enable: true)
         XyoBluetoothDeviceCreator.enable(enable: true)
         XyoSentinelXDeviceCreator().enable(enable: true)
+        XyoBridgeXDeviceCreator().enable(enable: true)
         
         scanner.start(mode: XYSmartScanMode.foreground)
         scanner.setDelegate(self, key: "main")
@@ -123,7 +125,16 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath as IndexPath) as! TableViewCellController
-        cell.title.text = "XYO"
+        let device = self.devices[indexPath.row]
+        
+        if (device as? XyoSentinelXDevice != nil) {
+            cell.title.text = "XYO SentinelX"
+        } else if (device as? XyoBridgeXDevice != nil) {
+            cell.title.text = "XYO BridgeX"
+        } else {
+            cell.title.text = "XYO Device"
+        }
+        
         return cell
     }
     
@@ -177,14 +188,21 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
             }
             
             device.connection {
+            
+                XYCentral.instance.connect(to: device)
+
                 guard let pipe = device.tryCreatePipe() else {
                     return
                 }
                 
                 let handler = XyoNetworkHandler(pipe: pipe)
                 
+                let awaiter = Promise<Any?>.pending()
+                
                 self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
                     
+                    
+                    awaiter.fulfill(nil)
                     
                     self.boundWitness = boundWitness
                     self.canUpdate = true
@@ -194,6 +212,11 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                         self.performSegue(withIdentifier: "showView", sender: self)
                     }
                 })
+                
+                _ = try await(awaiter)
+            
+            }.then {
+               XYCentral.instance.disconnect(from: device)
             }
         }
         
