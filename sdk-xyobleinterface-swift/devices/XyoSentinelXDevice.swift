@@ -59,8 +59,6 @@ public class XyoSentinelXDevice : XyoBluetoothDevice {
     }
     
     override public func attachPeripheral(_ peripheral: XYPeripheral) -> Bool {
-        let name = peripheral.advertisementData?[CBAdvertisementDataLocalNameKey] as? String
-
         guard let major = self.iBeacon?.major else {
             return false
         }

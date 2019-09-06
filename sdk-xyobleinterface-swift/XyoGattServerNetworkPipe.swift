@@ -13,6 +13,10 @@ import Promises
 
 /// A class to conform to the XyoNetworkPipe protocal, acting as a gatt server.
 class XyoGattServerNetworkPipe : XyoNetworkPipe {
+  func getNetworkHeuristics() -> [XyoObjectStructure] {
+    return []
+  }
+  
     private var readPromise = Promise<[UInt8]?>.pending()
     private let inputStream = XyoInputStream()
     

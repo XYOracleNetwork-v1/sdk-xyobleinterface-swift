@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,7 +25,6 @@
 		8C924DCC2210CA1A007FF765 /* XyoOutputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DCB2210CA1A007FF765 /* XyoOutputStream.swift */; };
 		8C924DCF2210CA66007FF765 /* XyoInputStreamTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C924DCE2210CA66007FF765 /* XyoInputStreamTest.swift */; };
 		8CF668932254795500BB1D41 /* XyoAdvertisementEncoderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF668922254795500BB1D41 /* XyoAdvertisementEncoderTest.swift */; };
-		8CF6689422547D0700BB1D41 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C924DB82210C956007FF765 /* Info.plist */; };
 		C50D8CE602246146FD8DF672 /* Pods_sdk_xyobleinterface_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377E99944DA253870605DEAB /* Pods_sdk_xyobleinterface_swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -251,16 +250,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "XYO Network";
 				TargetAttributes = {
 					8C924DA72210C956007FF765 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1030;
 					};
 					8C924DB02210C956007FF765 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1030;
 					};
 				};
 			};
@@ -294,7 +293,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CF6689422547D0700BB1D41 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +548,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -577,7 +575,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "network.xyo.mod-ble-swift";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -601,7 +599,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -624,7 +622,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "network.xyo.mod-ble-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
