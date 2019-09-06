@@ -1,9 +1,9 @@
-[logo]: https://www.xy.company/img/home/logo_xy.png
+[logo]: https://cdn.xy.company/img/brand/XY_Logo_GitHub.png
 
-![logo]
+[![logo]](https://xy.company)
 
 # sdk-xyobleinterface-swift
-[![](https://img.shields.io/gitter/room/XYOracleNetwork/Stardust.svg)](https://gitter.im/XYOracleNetwork/Dev) [![Maintainability](https://api.codeclimate.com/v1/badges/177ffd933f809522baaf/maintainability)](https://codeclimate.com/github/XYOracleNetwork/sdk-xyobleinterface-swift/maintainability)
+[![](https://img.shields.io/gitter/room/XYOracleNetwork/Stardust.svg)](https://gitter.im/XYOracleNetwork/Dev) [![Maintainability](https://api.codeclimate.com/v1/badges/177ffd933f809522baaf/maintainability)](https://codeclimate.com/github/XYOracleNetwork/sdk-xyobleinterface-swift/maintainability) [![](https://img.shields.io/cocoapods/v/sdk-xyobleinterface-swift.svg?style=flat)](https://cocoapods.org/pods/sdk-xyobleinterface-swift)
 
 This library is used to create XYO transfer layer pipes with nearby devices, and can act as both a peripheral and a central when talking to other XYO enabled bluetooth devices. Found also in this repo is a sample app that can create bound witnesses with nearby XYO devices. Please view the sample app to get an example on how to create bluetooth pipes.
 

@@ -8,16 +8,22 @@
 
 Pod::Spec.new do |s|
   s.name             = 'sdk-xyobleinterface-swift'
-  s.version          = '0.1.5-beta.3'
+  s.version          = '3.0.0'
   s.summary          = 'A short description of sdk-xyobleinterface-swift'
-
+  s.swift_version    = 5.0
+# This description is used to generate tags and improve search results.
+#   * Think: What does it do? Why did you write it? What is the focus?
+#   * Try to keep it short, snappy and to the point.
+#   * Write the description between the DESC delimiters below.
+#   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
 TODO: Add long description of the pod here.
                        DESC
 
   s.homepage         = 'https://github.com/XYOracleNetwork/sdk-xyobleinterface-swift'
-  s.license          = { :type => 'MIT', :file => 'LICENSE.txt' }
+  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.license          = { :type => 'LGPL3', :file => 'LICENSE' }
   s.author           = { 'Carter Harrison' => 'carterjharrison@gmail.com' }
   s.source           = { :git => 'https://github.com/XYOracleNetwork/sdk-xyobleinterface-swift', :tag => s.version.to_s }
 
@@ -27,9 +33,12 @@ TODO: Add long description of the pod here.
   
   s.dependency 'PromisesSwift', '~> 1.2.4'
 
-  s.dependency 'sdk-objectmodel-swift',  '~> 0.1.2-beta.3'
-  s.dependency 'sdk-core-swift', '~> 0.1.5-beta.2'
-  s.dependency 'XyBleSdk', '~> 0.0.1'
+  s.dependency 'sdk-objectmodel-swift',  '~> 3.0'
+  s.dependency 'sdk-core-swift', '~> 3.0.1'
+  s.dependency 'XyBleSdk', '~> 3.0'
 
+  s.subspec 'XyBleSdk' do |ss|
+      ss.source_files         = '../sdk-ble-swift/Source/**/*.{swift}'
+  end
 
 end

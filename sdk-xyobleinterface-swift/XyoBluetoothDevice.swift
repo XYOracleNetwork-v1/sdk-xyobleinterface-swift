@@ -18,6 +18,10 @@ import sdk_objectmodel_swift
 /// one chould not use an instance of this class as a pipe, but tryCreatePipe() to get an instance of
 /// a pipe.
 open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDelegate, XyoNetworkPipe {
+  public func getNetworkHeuristics() -> [XyoObjectStructure] {
+    return []
+  }
+  
     /// The defining family for a XyoBluetoothDevice, this helps the process of creatig a device, and making
     /// sure that it complies to the XYO pipe spec.
     public static let family = XYDeviceFamily.init(uuid: UUID(uuidString: XyoBluetoothDevice.uuid)!,
