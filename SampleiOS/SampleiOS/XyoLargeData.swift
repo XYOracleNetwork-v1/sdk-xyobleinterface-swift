@@ -10,7 +10,7 @@ import Foundation
 import sdk_core_swift
 import sdk_objectmodel_swift
 
-struct XyoLargeData : XyoHueresticGetter {
+struct XyoLargeData : XyoHeuristicGetter {
     private let numberOfBytes : UInt
     
     init(numberOfBytes : UInt) {
