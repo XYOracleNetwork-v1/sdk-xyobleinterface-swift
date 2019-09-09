@@ -30,7 +30,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     private let storageProvider = XyoInMemoryStorage()
     
     /// The interface for talking to the storageProvider to store orgin blocks.
-    private var blockRepo : XyoStrageProviderOriginBlockRepository
+    private var blockRepo : XyoStorageProviderOriginBlockRepository
     
     /// The node that handles all of the bound witnessing.
     private var originChainCreator : XyoRelayNode
@@ -47,8 +47,8 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     
     /// The initer to init all of the XYO related objects.
     required init?(coder aDecoder: NSCoder) {
-        self.blockRepo = XyoStrageProviderOriginBlockRepository(storageProvider: storageProvider, hasher: hasher)
-        let originStateRepo = XyoStorageOriginChainStateRepository(storage: storageProvider)
+        self.blockRepo = XyoStorageProviderOriginBlockRepository(storageProvider: storageProvider, hasher: hasher)
+        let originStateRepo = XyoStorageOriginStateRepository(storage: storageProvider)
         let bridgeRepo = XyoStorageBridgeQueueRepository(storage: storageProvider)
         let repositoryConfiguration = XyoRepositoryConfiguration(originState: originStateRepo, originBlock: self.blockRepo)
         
@@ -92,7 +92,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         let handler = XyoNetworkHandler(pipe: pipe)
         
         DispatchQueue.global().async {
-            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0x01, withOther: 0x01), completion: { (boundWitness, error) in
+            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalog(forOther: 0x01, withOther: 0x01), completion: { (boundWitness, error) in
                 
                 self.boundWitness = boundWitness
                 pipe.close()
@@ -189,7 +189,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
             
             device.connection {
             
-                XYCentral.instance.connect(to: device)
+                device.connect()
 
                 guard let pipe = device.tryCreatePipe() else {
                     return
@@ -199,14 +199,14 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                 
                 let awaiter = Promise<Any?>.pending()
                 
-                self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalogue(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
+                self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalog(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
                     
                     
                     awaiter.fulfill(nil)
                     
                     self.boundWitness = boundWitness
                     self.canUpdate = true
-                    XYCentral.instance.disconnect(from: device)
+                    device.disconnect()
                     
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "showView", sender: self)
@@ -216,7 +216,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
                 _ = try await(awaiter)
             
             }.then {
-               XYCentral.instance.disconnect(from: device)
+              device.disconnect()
             }
         }
         
@@ -225,7 +225,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     
     func smartScan(status: XYSmartScanStatus) {}
     func smartScan(location: XYLocationCoordinate2D) {}
-    func smartScan(detected device: XYBluetoothDevice, signalStrength: Int, family: XYDeviceFamily) {}
+    func smartScan(detected device: XYBluetoothDevice, rssi: Int, family: XYDeviceFamily) {}
     func smartScan(entered device: XYBluetoothDevice) {}
     func smartScan(exiting device: XYBluetoothDevice) {}
     func smartScan(exited device: XYBluetoothDevice) {}

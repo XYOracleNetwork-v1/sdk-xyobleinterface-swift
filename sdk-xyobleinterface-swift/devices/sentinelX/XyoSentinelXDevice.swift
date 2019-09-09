@@ -55,7 +55,7 @@ public class XyoSentinelXDevice : XyoDiffereniableDevice {
         self.lastButtonPressTime = nil
     }
     
-    public override func detected() {
+  public override func detected(_ rssi: Int) {
         if (isButtonPressed() && isButtonPressTimeoutDone()) {
             self.lastButtonPressTime = Date()
             XyoSentinelXManager.reportEvent(device: self, event: XyoSentinelXManager.Events.buttonpressed)
