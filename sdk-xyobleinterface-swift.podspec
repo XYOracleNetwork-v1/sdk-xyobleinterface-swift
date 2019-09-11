@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'sdk-xyobleinterface-swift'
-  s.version          = '3.0.4'
+  s.version          = '3.0.5'
   s.summary          = 'A short description of sdk-xyobleinterface-swift'
   s.swift_version    = '5.0'
 # This description is used to generate tags and improve search results.
@@ -35,6 +35,6 @@ XYO Ble Interface
 
   s.dependency 'sdk-objectmodel-swift',  '~> 3.0'
   s.dependency 'sdk-core-swift', '~> 3.0.1'
-  s.dependency 'XyBleSdk', '~> 3.0.1'
+  s.dependency 'XyBleSdk', '~> 3.0.3'
 
 end

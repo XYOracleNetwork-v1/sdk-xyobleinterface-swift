@@ -219,7 +219,7 @@ open class XyoBluetoothDevice: XYBluetoothDeviceBase, XYBluetoothDeviceNotifyDel
         
         inputStream.removePacket()
         
-        print("READ ENTIRE \(latestPacket?.toHexString())")
+        print("READ ENTIRE \(latestPacket?.toHexString() ?? "--")")
         return latestPacket
     }
     
