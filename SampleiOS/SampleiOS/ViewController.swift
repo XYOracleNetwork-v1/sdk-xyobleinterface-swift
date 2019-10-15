@@ -15,10 +15,7 @@ import Promises
 import sdk_objectmodel_swift
 
 class WeatherGetter : XyoHeuristicGetter {
-//    func getHeuristic() -> XyoObjectStructure? {
-//
-//    }
-    
+    // Just an example of passing a blob
     func getHeuristic() -> XyoObjectStructure? {
         let enodedTemp = XyoObjectStructure.newInstance(schema: XyoSchemas.BLOB, bytes: XyoBuffer(data: anyToBytes(10)))
          let encodedHumidity = XyoObjectStructure.newInstance(schema: XyoSchemas.BLOB, bytes: XyoBuffer(data: anyToBytes(20)))
@@ -93,7 +90,6 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         scanner.start(mode: XYSmartScanMode.foreground)
 
         self.originChainCreator.addHeuristic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
-//        self.originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
         
         XyoSentinelXManager.addListener(key: "main") { (device, event) in
             DispatchQueue.main.async {
