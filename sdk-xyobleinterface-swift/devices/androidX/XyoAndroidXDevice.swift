@@ -17,11 +17,11 @@ public enum XyoAndroidWifiStatus {
   case unknown
 }
 
-class XyoAndroidNetworkStausListener : XYBluetoothDeviceNotifyDelegate {
+class XyoAndroidNetworkStatusListener : XYBluetoothDeviceNotifyDelegate {
   var onWifiChangeCallback: ((_: XyoAndroidWifiStatus) -> ())? = nil
   
   func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
-    print("XyoAndroidNetworkStausListener \(value.asString)")
+    print("XyoAndroidNetworkStatusListener \(String(describing: value.asString))")
     guard let stringValue = value.asString else {
       return
     }
@@ -49,7 +49,7 @@ class XyoAndroidIpListener : XYBluetoothDeviceNotifyDelegate {
   var onIpChange: ((_: String) -> ())? = nil
   
   func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
-    print("XyoAndroidIpListener \(value.asString)")
+    print("XyoAndroidIpListener \(String(describing: value.asString))")
     guard let stringValue = value.asString else {
       return
     }
@@ -62,7 +62,7 @@ class XyoAndroidSsidListener : XYBluetoothDeviceNotifyDelegate {
   var onSsidChange: ((_: String) -> ())? = nil
   
   func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
-    print("XyoAndroidSsidListener \(value.asString)")
+    print("XyoAndroidSsidListener \(String(describing: value.asString))")
     guard let stringValue = value.asString else {
       return
     }
@@ -75,7 +75,7 @@ class XyoAndroidSsidListener : XYBluetoothDeviceNotifyDelegate {
 public class XyoAndroidXDevice : XyoDiffereniableDevice {
   private var delgateKey = ""
   private var hasMutex = false
-  private let networkStatusListener = XyoAndroidNetworkStausListener()
+  private let networkStatusListener = XyoAndroidNetworkStatusListener()
   private let ipListener = XyoAndroidIpListener()
   private let ssidListener = XyoAndroidSsidListener()
   

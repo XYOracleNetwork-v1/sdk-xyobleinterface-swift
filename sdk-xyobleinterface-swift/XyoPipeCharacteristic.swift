@@ -32,11 +32,11 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
     private var pipes = [String : XyoGattServerNetworkPipe] ()
     
     /// The listener to call back to after a pipe is created.
-    private let listener : XyoPipeCharacteristicLisitner
+  private weak var listener : XyoPipeCharacteristicListener?
     
     /// Creats a new instance of XyoPipeCharacteristic
     /// - Parameter listener: The listener to call back to when a new pipe is created.
-    init (listener : XyoPipeCharacteristicLisitner) {
+    init (listener : XyoPipeCharacteristicListener) {
         self.listener = listener
     }
     
@@ -87,7 +87,7 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
             let pipe = XyoGattServerNetworkPipe(initiationData: advPacket,peripheral: peripheral,centrel: request.central, char: cbCharacteristic, listener: self)
             
             pipes[request.central.identifier.uuidString] = pipe
-            listener.onPipe(pipe: pipe)
+            listener?.onPipe(pipe: pipe)
             
             return true
         }
@@ -104,7 +104,7 @@ class XyoPipeCharacteristic : XYMutableCharacteristic, XyoGattServerLisitener {
 }
 
 /// A simple protocol to call back to when a new pipe has been created.
-public protocol XyoPipeCharacteristicLisitner {
+public protocol XyoPipeCharacteristicListener: class{
     
     /// This function will be called whenever a new pipe is created.
     /// - Warning: Calls off of this pipe will be blocking
