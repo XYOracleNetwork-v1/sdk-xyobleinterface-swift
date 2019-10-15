@@ -12,11 +12,25 @@ import XyBleSdk
 import sdk_core_swift
 import sdk_xyobleinterface_swift
 import Promises
+import sdk_objectmodel_swift
 
+class WeatherGetter : XyoHeuristicGetter {
+    // Just an example of passing a blob
+    func getHeuristic() -> XyoObjectStructure? {
+        let enodedTemp = XyoObjectStructure.newInstance(schema: XyoSchemas.BLOB, bytes: XyoBuffer(data: anyToBytes(10)))
+         let encodedHumidity = XyoObjectStructure.newInstance(schema: XyoSchemas.BLOB, bytes: XyoBuffer(data: anyToBytes(20)))
+         return XyoIterableStructure.createUntypedIterableObject(schema: XyoSchemas.BLOB, values: [enodedTemp, encodedHumidity])
+    }
+    func anyToBytes<T>(_ value: T) -> [UInt8] {
+        var value = value
+        return withUnsafeBytes(of: &value) { Array($0) }.reversed()
+    }
+    
+}
 
 /// The primary view controller that maintains the list of device and handles bound witnesses.
 /// This view is used as a test app for doung bound witnesses with other XYO BLE enabled devices.
-class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharacteristicLisitner {
+class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharacteristicListener {
     /// The current bound witness that is shown after a bound witness is done
     private var boundWitness : XyoBoundWitness? = nil
     
@@ -70,12 +84,12 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         XyoBluetoothDeviceCreator.enable(enable: true)
         XyoSentinelXDeviceCreator().enable(enable: true)
         XyoBridgeXDeviceCreator().enable(enable: true)
+        scanner.setDelegate(self, key: "main")
+        server.start(listener: (self as XyoPipeCharacteristicListener))
         
         scanner.start(mode: XYSmartScanMode.foreground)
-        scanner.setDelegate(self, key: "main")
-        
-        // originChainCreator.addHuerestic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
-        server.start(listener: (self as XyoPipeCharacteristicLisitner))
+
+        self.originChainCreator.addHeuristic(key: "large", getter: XyoLargeData(numberOfBytes: 10))
         
         XyoSentinelXManager.addListener(key: "main") { (device, event) in
             DispatchQueue.main.async {
@@ -87,23 +101,7 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
         
     }
     
-    /// This function is called whenever a pipe is made from the BLE server
-    func onPipe(pipe: XyoNetworkPipe) {
-        let handler = XyoNetworkHandler(pipe: pipe)
-        
-        DispatchQueue.global().async {
-            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalog(forOther: 0x01, withOther: 0x01), completion: { (boundWitness, error) in
-                
-                self.boundWitness = boundWitness
-                pipe.close()
-                if (self.boundWitness != nil) {
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "showView", sender: self)
-                    }
-                }
-            })
-        }
-    }
+
     
     
     /// This is the function that notifies us of the devices nearby
@@ -181,47 +179,59 @@ class ViewController: UITableViewController, XYSmartScanDelegate, XyoPipeCharact
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.canUpdate = false
+        guard let device = self.devices[indexPath.row] as? XyoBluetoothDevice else {
+            return
+        }
         
-        DispatchQueue.main.async {
-            guard let device = self.devices[indexPath.row] as? XyoBluetoothDevice else {
+        device.connection {
+        
+            device.connect()
+
+            guard let pipe = device.tryCreatePipe() else {
                 return
             }
             
-            device.connection {
+            let handler = XyoNetworkHandler(pipe: pipe)
             
-                device.connect()
-
-                guard let pipe = device.tryCreatePipe() else {
-                    return
+            let awaiter = Promise<Any?>.pending()
+            
+            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalog(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
+                
+                
+                awaiter.fulfill(nil)
+                
+                self.boundWitness = boundWitness
+                self.canUpdate = true
+                device.disconnect()
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "showView", sender: self)
                 }
+            })
+            
+            _ = try await(awaiter)
+        
+        }.then {
+          device.disconnect()
+        }
+    }
+    /// This function is called whenever a pipe is made from the BLE server
+    func onPipe(pipe: XyoNetworkPipe) {
+        let handler = XyoNetworkHandler(pipe: pipe)
+        
+        DispatchQueue.global().async {
+            self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalog(forOther: 0x01, withOther: 0x01), completion: { (boundWitness, error) in
                 
-                let handler = XyoNetworkHandler(pipe: pipe)
-                
-                let awaiter = Promise<Any?>.pending()
-                
-                self.originChainCreator.boundWitness(handler: handler, procedureCatalogue: XyoFlagProcedureCatalog(forOther: 0xff, withOther: 0xff), completion: { (boundWitness, error) in
-                    
-                    
-                    awaiter.fulfill(nil)
-                    
-                    self.boundWitness = boundWitness
-                    self.canUpdate = true
-                    device.disconnect()
-                    
+                self.boundWitness = boundWitness
+                pipe.close()
+                if (self.boundWitness != nil) {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "showView", sender: self)
                     }
-                })
-                
-                _ = try await(awaiter)
-            
-            }.then {
-              device.disconnect()
-            }
+                }
+            })
         }
-        
     }
-    
     
     func smartScan(status: XYSmartScanStatus) {}
     func smartScan(location: XYLocationCoordinate2D) {}

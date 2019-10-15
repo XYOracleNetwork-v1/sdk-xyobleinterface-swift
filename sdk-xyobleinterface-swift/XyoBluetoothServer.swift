@@ -39,7 +39,7 @@ public struct XyoBluetoothServer {
     /// Starts the bluetooth server, and advertising. Will call back the the provided callback when a pipe has
     /// been created.
     /// - Parameter listener: The callback to call when a pipe has been found, this can be called mutpile times.
-    public func start (listener: XyoPipeCharacteristicLisitner) {
+    public func start (listener: XyoPipeCharacteristicListener) {
         service.addCharacteristic(characteristic: XyoPipeCharacteristic(listener: listener))
     
         server.turnOn().then { (result) in

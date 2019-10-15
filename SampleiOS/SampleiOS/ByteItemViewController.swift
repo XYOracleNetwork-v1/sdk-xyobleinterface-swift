@@ -16,11 +16,14 @@ class ByteItemViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = item?.title
-        
-        text.text = item?.desc
-        text.sizeToFit()
+    
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        text.text = item?.desc
+//        text.sizeToFit()
     }
     
     

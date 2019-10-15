@@ -21,7 +21,7 @@ class XyoBridgeNetworkStausListener : XYBluetoothDeviceNotifyDelegate {
     var onWifiChangeCallback: ((_: XyoBridgeWifiStatus) -> ())? = nil
 
     func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
-        print("XyoBridgeNetworkStausListener \(value.asString)")
+      print("XyoBridgeNetworkStausListener \(String(describing: value.asString))")
         guard let stringValue = value.asString else {
             return
         }
@@ -49,7 +49,7 @@ class XyoBridgeIpListener : XYBluetoothDeviceNotifyDelegate {
     var onIpChange: ((_: String) -> ())? = nil
 
     func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
-        print("XyoBridgeIpListener \(value.asString)")
+      print("XyoBridgeIpListener \(String(describing: value.asString))")
         guard let stringValue = value.asString else {
             return
         }
@@ -62,7 +62,7 @@ class XyoBridgeSsidListener : XYBluetoothDeviceNotifyDelegate {
     var onSsidChange: ((_: String) -> ())? = nil
 
     func update(for serviceCharacteristic: XYServiceCharacteristic, value: XYBluetoothResult) {
-        print("XyoBridgeSsidListener \(value.asString)")
+      print("XyoBridgeSsidListener \(String(describing: value.asString))")
         guard let stringValue = value.asString else {
             return
         }
