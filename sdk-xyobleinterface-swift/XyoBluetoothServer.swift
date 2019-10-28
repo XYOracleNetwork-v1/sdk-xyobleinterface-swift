@@ -77,6 +77,7 @@ public struct XyoBluetoothServer {
     
     /// Turns off the server and advertising
     public func stop () {
+        service.removeCharacteristics()
         server.stopAdvetrtising()
         server.turnOff()
     }
