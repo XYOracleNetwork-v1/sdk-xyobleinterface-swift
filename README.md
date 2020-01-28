@@ -2,9 +2,11 @@
 
 [![logo]](https://xyo.network)
 
+**NOTE** This SDK is deprecated, please refer to the XYO Swift SDK.
+
 # sdk-xyobleinterface-swift
 
-[![](https://img.shields.io/gitter/room/XYOracleNetwork/Stardust.svg)](https://gitter.im/XYOracleNetwork/Dev) [![Maintainability](https://api.codeclimate.com/v1/badges/177ffd933f809522baaf/maintainability)](https://codeclimate.com/github/XYOracleNetwork/sdk-xyobleinterface-swift/maintainability) [![](https://img.shields.io/cocoapods/v/sdk-xyobleinterface-swift.svg?style=flat)](https://cocoapods.org/pods/sdk-xyobleinterface-swift)
+[![Maintainability](https://api.codeclimate.com/v1/badges/177ffd933f809522baaf/maintainability)](https://codeclimate.com/github/XYOracleNetwork/sdk-xyobleinterface-swift/maintainability) [![](https://img.shields.io/cocoapods/v/sdk-xyobleinterface-swift.svg?style=flat)](https://cocoapods.org/pods/sdk-xyobleinterface-swift)
 
 - [Title](#sdk-xyobleinterface-swift)
 - [Description](#description)
